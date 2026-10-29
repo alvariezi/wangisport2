@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # 1. Setup PHP (Sesuaikan versi php-version jika menggunakan versi lain, misal '8.1' atau '8.3')
       - name: Setup PHP
