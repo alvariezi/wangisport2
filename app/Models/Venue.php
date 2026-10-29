@@ -11,24 +11,14 @@ class Venue extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code',
-        'slug',
         'name',
-        'tax_rate',
-        'service_fee_rate',
+        'code',
+        'slug', // <--- Pastikan 'slug' ada di sini
         'status',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'tax_rate' => 'decimal:4',
-            'service_fee_rate' => 'decimal:4',
-        ];
-    }
-
     /**
-     * Relasi HasMany ke model Tenant (Satu Venue bisa memiliki banyak Tenant Mitra).
+     * Relasi HasMany ke Tenant
      */
     public function tenants(): HasMany
     {
