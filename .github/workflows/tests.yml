@@ -6,7 +6,6 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
-    # Tambahkan bagian services ini agar MySQL aktif di GitHub Actions
     services:
       mysql:
         image: mysql:8.0
@@ -21,8 +20,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # (Langkah-langkah setup PHP, composer, dll sesuaikan dengan project Anda)
+      # 1. Setup PHP (Sesuaikan versi php-version jika menggunakan versi lain, misal '8.1' atau '8.3')
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, dom, fileinfo, mysql, pdo_mysql
 
+      # 2. Install Dependencies menggunakan Composer
+      - name: Install Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      # 3. Jalankan Migrasi Database
       - name: Run Migrations
         env:
           DB_CONNECTION: mysql
