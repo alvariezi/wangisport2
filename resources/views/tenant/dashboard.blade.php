@@ -18,19 +18,10 @@
                 <h2 class="text-2xl font-bold text-zinc-100">
                     {{ $tenant?->display_name ?? 'Siliwangi Arena Futsal & Badminton' }}
                 </h2>
-
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 text-xs font-semibold text-emerald-400">
-
-                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-
-                    Mitra Aktif
-
-                </span>
-
             </div>
 
             <p class="text-sm text-zinc-400 mt-2">
-                Lokasi Induk:
+                Lokasi :
 
                 <span class="font-medium text-zinc-200">
                     {{ $tenant?->venue?->name ?? 'GOR Siliwangi Sports Center' }}
@@ -38,23 +29,7 @@
             </p>
         </div>
 
-        <!-- TOMBOL TAMBAH LAPANGAN -->
-        <div class="flex items-center gap-2">
-
-            <a href="#"
-               class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-500 transition-all">
-
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 4v16m8-8H4"/>
-                </svg>
-
-                Tambah Lapangan
-
-            </a>
-
-        </div>
-
+        
     </div>
 
 

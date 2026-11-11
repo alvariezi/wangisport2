@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\Admin\AdminCommissionController;
@@ -12,6 +11,7 @@ use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\VenueCatalogController;
 
 use App\Http\Controllers\Tenant\TenantDashboardController;
+use App\Http\Controllers\Tenant\TenantCourtController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -88,22 +88,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/dashboard', [CustomerHomeController::class, 'index'])
                 ->name('dashboard');
 
-            // Checkout
             Route::get('/booking/checkout', [BookingController::class, 'checkout'])
                 ->name('booking.checkout');
 
-            // Proses pemesanan
             Route::post('/booking/process', [BookingController::class, 'process'])
                 ->name('booking.process');
 
-            // Riwayat pemesanan
             Route::get('/orders', [BookingController::class, 'index'])
                 ->name('orders.index');
 
-            // Detail pemesanan
             Route::get('/orders/{orderNumber}', [BookingController::class, 'show'])
                 ->name('orders.show');
-
         });
 
 
@@ -117,7 +112,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('admin.')
         ->group(function () {
 
-            // Dashboard Admin
             Route::get('/dashboard', [AdminDashboardController::class, 'index'])
                 ->name('dashboard');
 
@@ -142,25 +136,60 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::put('/commissions/{commission}', [AdminCommissionController::class, 'update'])
                 ->name('commissions.update');
-
         });
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | 5. PORTAL TENANT MITRA
-    |--------------------------------------------------------------------------
-    */
+    
 
-    Route::prefix('tenant')
-        ->name('tenant.')
-        ->group(function () {
+/*
+|--------------------------------------------------------------------------
+| PORTAL TENANT MITRA (RUTE KHUSUS BEBAS BENTROK)
+|--------------------------------------------------------------------------
+*/
 
-            // Dashboard Tenant
-            Route::get('/dashboard', [TenantDashboardController::class, 'index'])
-                ->name('dashboard');
+Route::prefix('tenant')
+    ->name('tenant.')
+    ->middleware(['auth', 'verified'])
+    ->group(function () {
 
-        });
+        // Dashboard Tenant
+        Route::get('/dashboard', [TenantDashboardController::class, 'index'])
+            ->name('dashboard');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CRUD KELOLA LAPANGAN
+        |--------------------------------------------------------------------------
+        | Menggunakan nama courts.manage.* agar tidak bentrok
+        | dengan modul Catalog.
+        */
+
+        // Menampilkan Daftar Lapangan
+        Route::get('/manage-courts', [TenantCourtController::class, 'index'])
+            ->name('courts.manage');
+
+        // Form Tambah Lapangan
+        Route::get('/manage-courts/create', [TenantCourtController::class, 'create'])
+            ->name('courts.manage.create');
+
+        // Menyimpan Lapangan Baru
+        Route::post('/manage-courts', [TenantCourtController::class, 'store'])
+            ->name('courts.manage.store');
+
+        // Form Edit Lapangan
+        Route::get('/manage-courts/{court}/edit', [TenantCourtController::class, 'edit'])
+            ->name('courts.manage.edit');
+
+        // Memperbarui Data Lapangan
+        Route::put('/manage-courts/{court}', [TenantCourtController::class, 'update'])
+            ->name('courts.manage.update');
+
+        // Menghapus Lapangan
+        Route::delete('/manage-courts/{court}', [TenantCourtController::class, 'destroy'])
+            ->name('courts.manage.destroy');
+
+    });
 
 });
 
@@ -171,4 +200,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 |--------------------------------------------------------------------------
 */
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';
