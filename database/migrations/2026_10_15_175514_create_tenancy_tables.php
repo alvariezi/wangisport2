@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('status', 20)->default('active');
             $table->timestamps(6);
         });
+
         Schema::create('tenants', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('venue_id')->constrained()->restrictOnDelete();
@@ -32,13 +33,17 @@ return new class extends Migration
             $table->unique(['venue_id', 'slug']);
             $table->unique(['id', 'venue_id']);
         });
+       
+
         Schema::create('tenant_balances', function (Blueprint $table): void {
             $table->foreignId('tenant_id')->primary()->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('available_amount')->default(0);
             $table->unsignedBigInteger('held_amount')->default(0);
             $table->timestamps(6);
         });
+
         DB::statement('ALTER TABLE tenant_balances ADD CONSTRAINT chk_tenant_balance_nonneg CHECK (available_amount >= 0 AND held_amount >= 0)');
+
         Schema::create('tenant_bank_accounts', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
@@ -52,11 +57,13 @@ return new class extends Migration
             $table->timestamps(6);
             $table->unique(['tenant_id', 'id']);
         });
+
         Schema::table('users', function (Blueprint $table): void {
             if (! Schema::hasColumn('users', 'phone_e164')) {
                 $table->string('phone_e164', 20)->nullable()->unique()->after('email');
             }
         });
+
         Schema::create('user_venue_roles', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
@@ -65,6 +72,7 @@ return new class extends Migration
             $table->timestamps(6);
             $table->unique(['user_id', 'venue_id', 'role']);
         });
+
         Schema::create('user_tenant_roles', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
@@ -80,10 +88,12 @@ return new class extends Migration
     {
         Schema::dropIfExists('user_tenant_roles');
         Schema::dropIfExists('user_venue_roles');
+        
         Schema::table('users', function (Blueprint $table): void {
             $table->dropUnique(['phone_e164']);
             $table->dropColumn('phone_e164');
         });
+
         Schema::dropIfExists('tenant_bank_accounts');
         Schema::dropIfExists('tenant_balances');
         Schema::dropIfExists('tenants');

@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // 1. Jam Operasional Tenant
         Schema::create('tenant_operating_hours', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
@@ -17,16 +18,21 @@ return new class extends Migration
             $table->timestamps(6);
             $table->unique(['tenant_id', 'day_of_week']);
         });
+
+        // 2. Skema Komisi Platform & Tenant
         Schema::create('commission_schemes', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('tenant_id')->nullable()->constrained('tenants')->nullOnDelete();
             $table->decimal('commission_rate', 6, 4);
             $table->timestampTz('valid_from', 6);
             $table->timestampTz('valid_to', 6)->nullable();
+            $table->string('notes')->nullable();
             $table->timestamps(6);
             $table->unique(['tenant_id', 'id']);
             $table->index(['tenant_id', 'valid_from']);
         });
+
+        // 3. Lapangan (Courts)
         Schema::create('courts', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
@@ -38,6 +44,8 @@ return new class extends Migration
             $table->unique(['tenant_id', 'name']);
             $table->unique(['tenant_id', 'id']);
         });
+
+        // 4. Jadwal & Tarif Lapangan (Timeslots)
         Schema::create('timeslots', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
@@ -52,6 +60,8 @@ return new class extends Migration
             $table->index(['tenant_id', 'court_id', 'is_available']);
             $table->foreign(['tenant_id', 'court_id'])->references(['tenant_id', 'id'])->on('courts')->restrictOnDelete();
         });
+
+        // 5. Layanan Tambahan (Add-ons)
         Schema::create('add_ons', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();

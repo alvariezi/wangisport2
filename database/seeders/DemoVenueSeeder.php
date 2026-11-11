@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CommissionScheme;
 use App\Models\Court;
 use App\Models\Tenant;
 use App\Models\Timeslot;
@@ -14,7 +15,7 @@ class DemoVenueSeeder extends Seeder
     {
         // 1. Buat Venue Demo
         $venue = Venue::firstOrCreate(
-            ['code' => 'VNU-SILIWANGI'],
+            ['code' => 'VNU-SILIWANGI'], 
             [
                 'slug' => 'gor-siliwangi',
                 'name' => 'GOR Siliwangi Sports Center',
@@ -26,7 +27,7 @@ class DemoVenueSeeder extends Seeder
 
         // 2. Buat Tenant Demo
         $tenant = Tenant::firstOrCreate(
-            ['code' => 'TNT-SILIWANGI'],
+            ['code' => 'TNT-SILIWANGI'], 
             [
                 'venue_id' => $venue->id,
                 'slug' => 'siliwangi-futsal',
@@ -35,12 +36,12 @@ class DemoVenueSeeder extends Seeder
             ]
         );
 
-        // 3. Buat Lapangan Demo
+        // 3. Buat Lapangan Demo (Courts)
         $court1 = Court::firstOrCreate(
             [
                 'tenant_id' => $tenant->id,
                 'name' => 'Lapangan Futsal A',
-            ],
+            ], 
             [
                 'type' => 'futsal',
                 'surface_type' => 'Rumput Sintetis',
@@ -52,7 +53,7 @@ class DemoVenueSeeder extends Seeder
             [
                 'tenant_id' => $tenant->id,
                 'name' => 'Lapangan Badminton 1',
-            ],
+            ], 
             [
                 'type' => 'badminton',
                 'surface_type' => 'Karpet Vinyl',
@@ -60,30 +61,30 @@ class DemoVenueSeeder extends Seeder
             ]
         );
 
-        // 4. Buat Timeslot Demo
+        // 4. Buat Timeslot Demo (Jadwal & Tarif Lapangan)
         $timeslots = [
             [
-                'start_time' => '08:00:00',
-                'end_time' => '09:00:00',
-                'base_price' => 120000,
+                'start_time' => '08:00:00', 
+                'end_time' => '09:00:00', 
+                'base_price' => 120000, 
                 'is_peak_rate' => false,
             ],
             [
-                'start_time' => '09:00:00',
-                'end_time' => '10:00:00',
-                'base_price' => 120000,
+                'start_time' => '09:00:00', 
+                'end_time' => '10:00:00', 
+                'base_price' => 120000, 
                 'is_peak_rate' => false,
             ],
             [
-                'start_time' => '18:00:00',
-                'end_time' => '19:00:00',
-                'base_price' => 180000,
+                'start_time' => '18:00:00', 
+                'end_time' => '19:00:00', 
+                'base_price' => 180000, 
                 'is_peak_rate' => true,
             ],
             [
-                'start_time' => '19:00:00',
-                'end_time' => '20:00:00',
-                'base_price' => 180000,
+                'start_time' => '19:00:00', 
+                'end_time' => '20:00:00', 
+                'base_price' => 180000, 
                 'is_peak_rate' => true,
             ],
         ];
@@ -96,7 +97,7 @@ class DemoVenueSeeder extends Seeder
                         'court_id' => $court->id,
                         'start_time' => $slot['start_time'],
                         'end_time' => $slot['end_time'],
-                    ],
+                    ], 
                     [
                         'base_price' => $slot['base_price'],
                         'is_peak_rate' => $slot['is_peak_rate'],
@@ -105,5 +106,18 @@ class DemoVenueSeeder extends Seeder
                 );
             }
         }
+
+        // 5. Buat Skema Komisi Default Platform (Global)
+        CommissionScheme::firstOrCreate(
+            [
+                'tenant_id' => null,
+                'valid_to' => null,
+            ], 
+            [
+                'commission_rate' => 0.1500,
+                'valid_from' => now(),
+                'notes' => 'Komisi Default Platform (Global)',
+            ]
+        );
     }
 }

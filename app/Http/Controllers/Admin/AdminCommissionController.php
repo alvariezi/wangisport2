@@ -46,7 +46,6 @@ class AdminCommissionController extends Controller
         $validated = $request->validate([
             'tenant_id'       => 'nullable|exists:tenants,id',
             'commission_rate' => 'required|numeric|min:0|max:100',
-            'notes'           => 'nullable|string|max:255',
         ]);
 
         DB::transaction(function () use ($validated) {
@@ -62,7 +61,6 @@ class AdminCommissionController extends Controller
                 'commission_rate' => $validated['commission_rate'],
                 'valid_from'      => $now,
                 'valid_to'        => null,
-                'notes'           => $validated['notes'] ?? 'Atur skema komisi baru',
             ]);
         });
 
@@ -85,12 +83,10 @@ class AdminCommissionController extends Controller
     {
         $validated = $request->validate([
             'commission_rate' => 'required|numeric|min:0|max:100',
-            'notes'           => 'nullable|string|max:255',
         ]);
 
         $commission->update([
             'commission_rate' => $validated['commission_rate'],
-            'notes'           => $validated['notes'],
         ]);
 
         return redirect()->route('admin.commissions.index')

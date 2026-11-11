@@ -15,7 +15,6 @@ class CommissionScheme extends Model
         'commission_rate',
         'valid_from',
         'valid_to',
-        'notes',
     ];
 
     protected $casts = [
