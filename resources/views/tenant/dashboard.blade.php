@@ -21,7 +21,7 @@
             </div>
 
             <p class="text-sm text-zinc-400 mt-2">
-                Lokasi Induk:
+                Lokasi :
 
                 <span class="font-medium text-zinc-200">
                     {{ $tenant?->venue?->name ?? 'GOR Siliwangi Sports Center' }}
