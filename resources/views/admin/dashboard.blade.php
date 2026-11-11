@@ -8,11 +8,7 @@
                     Ringkasan performa dan manajemen venue mitra Wangisport
                 </p>
             </div>
-            <div>
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">
-                    <span class="h-2 w-2 rounded-full bg-emerald-500"></span> System Normal
-                </span>
-            </div>
+
         </div>
 
         <!-- Kartu Statistik Utama Dinamis -->
