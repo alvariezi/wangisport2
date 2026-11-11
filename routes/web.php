@@ -69,7 +69,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return redirect()->route('tenant.dashboard');
         }
 
-        return redirect()->route('customer.home');
+        return redirect()->route('customer.dashboard');
 
     })->name('dashboard');
 
