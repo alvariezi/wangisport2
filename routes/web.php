@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\AdminTenantController;
 use App\Http\Controllers\Admin\AdminVenueController;
 
 use App\Http\Controllers\Customer\BookingController;
-use App\Http\Controllers\Customer\CustomerDashboardController;
+use App\Http\Controllers\Customer\CustomerHomeController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\VenueCatalogController;
 
@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Halaman utama
-Route::get('/', [HomeController::class, 'index'])
-    ->name('home');
+Route::get('/dashboard', [CustomerHomeController::class, 'index'])
+    ->name('customer.dashboard');
 
 // Katalog venue
 Route::get('/venues', [VenueCatalogController::class, 'index'])
@@ -69,7 +69,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return redirect()->route('tenant.dashboard');
         }
 
-        return redirect()->route('customer.dashboard');
+        return redirect()->route('customer.home');
 
     })->name('dashboard');
 
@@ -84,8 +84,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('customer.')
         ->group(function () {
 
-            // Dashboard Customer
-            Route::get('/dashboard', [CustomerDashboardController::class, 'index'])
+            // Home Customer
+            Route::get('/dashboard', [CustomerHomeController::class, 'index'])
                 ->name('dashboard');
 
             // Checkout
