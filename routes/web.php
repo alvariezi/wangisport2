@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\AdminVenueController;
 
 use App\Http\Controllers\Customer\BookingController;
 use App\Http\Controllers\Customer\CustomerHomeController;
-use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\VenueCatalogController;
 
 use App\Http\Controllers\Tenant\TenantDashboardController;
@@ -22,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-// Halaman utama
-Route::get('/dashboard', [CustomerHomeController::class, 'index'])
-    ->name('customer.dashboard');
+// Halaman utama (Akses root '/')
+Route::get('/', [CustomerHomeController::class, 'index'])
+    ->name('home');
 
 // Katalog venue
 Route::get('/venues', [VenueCatalogController::class, 'index'])
@@ -42,23 +41,18 @@ Route::get('/venues/{venue:slug}/tenants/{tenant:slug}', [VenueCatalogController
 Route::get('/availability', [VenueCatalogController::class, 'checkAvailability'])
     ->name('availability.check');
 
-
 /*
 |--------------------------------------------------------------------------
-| 2. RUTE PENGGUNA TERAUTENTIKASI
+| 2. RUTE PENGGUNA TERAUTENTIKASI (Multi-Role Dashboard & Portals)
 |--------------------------------------------------------------------------
 */
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
     /*
-    |--------------------------------------------------------------------------
     | Redirect Dashboard Berdasarkan Role
-    |--------------------------------------------------------------------------
     */
-
     Route::get('/dashboard', function () {
-
         $user = Auth::user();
 
         if ($user?->role === 'admin') {
@@ -70,7 +64,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         }
 
         return redirect()->route('customer.dashboard');
-
     })->name('dashboard');
 
 
@@ -79,12 +72,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     | 3. PORTAL CUSTOMER
     |--------------------------------------------------------------------------
     */
-
     Route::prefix('customer')
         ->name('customer.')
         ->group(function () {
-
-            // Home Customer
             Route::get('/dashboard', [CustomerHomeController::class, 'index'])
                 ->name('dashboard');
 
@@ -107,11 +97,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     | 4. PORTAL SUPER ADMIN
     |--------------------------------------------------------------------------
     */
-
     Route::prefix('admin')
         ->name('admin.')
         ->group(function () {
-
             Route::get('/dashboard', [AdminDashboardController::class, 'index'])
                 ->name('dashboard');
 
@@ -139,59 +127,39 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
 
-    
+    /*
+    |--------------------------------------------------------------------------
+    | 5. PORTAL TENANT MITRA
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('tenant')
+        ->name('tenant.')
+        ->group(function () {
+            // Dashboard Tenant
+            Route::get('/dashboard', [TenantDashboardController::class, 'index'])
+                ->name('dashboard');
 
-/*
-|--------------------------------------------------------------------------
-| PORTAL TENANT MITRA (RUTE KHUSUS BEBAS BENTROK)
-|--------------------------------------------------------------------------
-*/
+            // CRUD KELOLA LAPANGAN
+            Route::get('/manage-courts', [TenantCourtController::class, 'index'])
+                ->name('courts.manage');
 
-Route::prefix('tenant')
-    ->name('tenant.')
-    ->middleware(['auth', 'verified'])
-    ->group(function () {
+            Route::get('/manage-courts/create', [TenantCourtController::class, 'create'])
+                ->name('courts.manage.create');
 
-        // Dashboard Tenant
-        Route::get('/dashboard', [TenantDashboardController::class, 'index'])
-            ->name('dashboard');
+            Route::post('/manage-courts', [TenantCourtController::class, 'store'])
+                ->name('courts.manage.store');
 
+            Route::get('/manage-courts/{court}/edit', [TenantCourtController::class, 'edit'])
+                ->name('courts.manage.edit');
 
-        /*
-        |--------------------------------------------------------------------------
-        | CRUD KELOLA LAPANGAN
-        |--------------------------------------------------------------------------
-        | Menggunakan nama courts.manage.* agar tidak bentrok
-        | dengan modul Catalog.
-        */
+            Route::put('/manage-courts/{court}', [TenantCourtController::class, 'update'])
+                ->name('courts.manage.update');
 
-        // Menampilkan Daftar Lapangan
-        Route::get('/manage-courts', [TenantCourtController::class, 'index'])
-            ->name('courts.manage');
+            Route::delete('/manage-courts/{court}', [TenantCourtController::class, 'destroy'])
+                ->name('courts.manage.destroy');
+        });
 
-        // Form Tambah Lapangan
-        Route::get('/manage-courts/create', [TenantCourtController::class, 'create'])
-            ->name('courts.manage.create');
-
-        // Menyimpan Lapangan Baru
-        Route::post('/manage-courts', [TenantCourtController::class, 'store'])
-            ->name('courts.manage.store');
-
-        // Form Edit Lapangan
-        Route::get('/manage-courts/{court}/edit', [TenantCourtController::class, 'edit'])
-            ->name('courts.manage.edit');
-
-        // Memperbarui Data Lapangan
-        Route::put('/manage-courts/{court}', [TenantCourtController::class, 'update'])
-            ->name('courts.manage.update');
-
-        // Menghapus Lapangan
-        Route::delete('/manage-courts/{court}', [TenantCourtController::class, 'destroy'])
-            ->name('courts.manage.destroy');
-
-    });
-
-});
+}); // <-- Penutup utama untuk group middleware(['auth', 'verified'])
 
 
 /*
