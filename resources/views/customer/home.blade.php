@@ -39,7 +39,7 @@
                 <div>
                     <span class="inline-block px-3 py-1 mb-3 text-xs font-semibold bg-[#84CC16]/10 text-[#65A30D] border border-[#84CC16]/20 rounded-full tracking-wider uppercase">Tentang Kami</span>
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-snug text-[#0F172A]">
-                        Sewa lapangan dengan <span class="text-[#65A30D] block sm:inline">mudah dan cepat.</span>
+                        Sewa lapangan dengan <span class="text-[#65A30D] block sm:inline underline underline-offset-4 decoration-2 text-[#65A30D]">mudah dan cepat.</span>
                     </h2>
                     <p class="text-[#475569] text-base sm:text-lg mb-8 leading-relaxed">
                         Cek ketersediaan jadwal dan amankan lapangan favoritmu secara langsung online. Praktis, tanpa perlu repot datang atau ragu kehabisan slot bersama rekan seperjuanganmu.
@@ -61,26 +61,50 @@
                 </div>
 
                 {{-- Grid 4 Fasilitas / Foto Venue --}}
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-slate-900/90 h-40 sm:h-52 rounded-2xl border border-slate-800 flex items-center justify-center text-xs sm:text-sm font-medium text-slate-400 p-3 text-center hover:border-slate-700 transition shadow-inner">
-                        Court Tenis Outdoor
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                    <!-- Card 1: Court Tenis Outdoor -->
+                    <div class="relative group overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 h-56 shadow-xl">
+                        <img src="{{ asset('Fasilitas (Tentang Kami)/Rectangle-6.png') }}" alt="Court Tenis Outdoor" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-slate-700/50 shadow-md">
+                            Court Tenis
+                        </div>
                     </div>
-                    <div class="bg-slate-900/90 h-40 sm:h-52 rounded-2xl border border-slate-800 flex items-center justify-center text-xs sm:text-sm font-medium text-slate-400 p-3 text-center hover:border-slate-700 transition shadow-inner">
-                        Arena Futsal Pro
+
+                    <!-- Card 2: Arena Futsal Pro -->
+                    <div class="relative group overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 h-56 shadow-xl">
+                        <img src="{{ asset('Fasilitas (Tentang Kami)/Rectangle 9.png') }}" alt="Arena Futsal Pro" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+
+                        <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-slate-700/50 shadow-md">
+                            Arena Futsal Pro
+                        </div>
                     </div>
-                    <div class="bg-slate-900/90 h-40 sm:h-52 rounded-2xl border border-slate-800 flex items-center justify-center text-xs sm:text-sm font-medium text-slate-400 p-3 text-center hover:border-slate-700 transition shadow-inner">
-                        Mini Soccer Turf
+
+                    <!-- Card 3: Mini Soccer Turf -->
+                    <div class="relative group overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 h-56 shadow-xl">
+                        <img src="{{ asset('Fasilitas (Tentang Kami)/Rectangle 7.png') }}" alt="Mini Soccer Turf" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+
+                        <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-slate-700/50 shadow-md">
+                            Mini Soccer Turf
+                        </div>
                     </div>
-                    <div class="bg-slate-900/90 h-40 sm:h-52 rounded-2xl border border-slate-800 flex items-center justify-center text-xs sm:text-sm font-medium text-slate-400 p-3 text-center hover:border-slate-700 transition shadow-inner">
-                        Badminton Hall
+
+                    <!-- Card 4: Badminton Hall -->
+                    <div class="relative group overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 h-56 shadow-xl">
+                        <img src="{{ asset('Fasilitas (Tentang Kami)/Rectangle 10.png') }}" alt="Badminton Hall" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+
+                        <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-slate-700/50 shadow-md">
+                            Badminton Hall
+                        </div>
                     </div>
+
                 </div>
             </div>
         </section>
 
         {{-- Rekomendasi Olahraga Section --}}
         <section id="lapangan" class="w-full py-16 lg:py-24 px-6 sm:px-8 lg:px-16 bg-[#0F172A] border-b border-slate-800/80">
-            <div class="w-full">
+            <div class="w-full max-w-7xl mx-auto">
                 <div class="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-12 gap-4">
                     <div>
                         <span class="inline-block px-3 py-1 mb-2 text-xs font-semibold bg-[#84CC16]/10 text-[#65A30D] border border-[#84CC16]/20 rounded-full tracking-wider uppercase">Pilihan Terbaik</span>
@@ -91,35 +115,177 @@
                     </p>
                 </div>
 
-                <!-- Grid Kartu Olahraga (8 Pilihan) -->
+                <!-- Grid Kartu Olahraga (Tanpa Array PHP, Langsung HTML Manual) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @php
-                    $sports = [
-                    ['name' => 'Mini Soccer', 'desc' => 'Rumput sintetis FIFA standard', 'img' => 'Foto Mini Soccer'],
-                    ['name' => 'Badminton', 'desc' => 'Karpet vinyl anti-slip & lighting LED', 'img' => 'Foto Badminton'],
-                    ['name' => 'Padel', 'desc' => 'Panorama glass wall outdoor', 'img' => 'Foto Padel'],
-                    ['name' => 'Basket', 'desc' => 'Lapangan kayu parquet & outdoor', 'img' => 'Foto Basket'],
-                    ['name' => 'Futsal', 'desc' => 'Interlock flooring & tribun penonton', 'img' => 'Foto Futsal'],
-                    ['name' => 'Sepak Bola', 'desc' => 'Full size natural grass field', 'img' => 'Foto Sepak Bola'],
-                    ['name' => 'Tenis', 'desc' => 'Acrylic court berstandar nasional', 'img' => 'Foto Tenis'],
-                    ['name' => 'Renang', 'desc' => 'Olympic size pool & water treatment', 'img' => 'Foto Renang'],
-                    ];
-                    @endphp
 
-                    @foreach($sports as $sport)
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition group flex flex-col justify-between shadow-lg">
+                    <!-- Card 1: Mini Soccer -->
+                    <a href="#" class="bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden hover:border-[#84CC16]/50 transition group flex flex-col justify-between shadow-xl block">
                         <div>
-                            <div class="h-48 bg-slate-800/60 flex items-center justify-center text-slate-400 text-sm relative overflow-hidden group-hover:bg-slate-800 transition">
-                                <span class="absolute top-3 right-3 text-[10px] px-2.5 py-1 bg-[#84CC16]/20 text-[#65A30D] border border-[#84CC16]/40 rounded-full font-bold tracking-wider shadow">TERSEDIA</span>
-                                {{ $sport['img'] }}
+                            <div class="h-48 relative overflow-hidden bg-slate-800">
+                                <img src="{{ asset('Rekomendasi Olahraga/Mini Soccer.png') }}" alt="Mini Soccer" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 right-3 text-[10px] px-3 py-1 bg-[#84CC16] text-slate-950 font-extrabold rounded-full tracking-wider shadow-md uppercase">TERSEDIA</span>
                             </div>
-                            <div class="p-5">
-                                <h3 class="font-bold text-lg text-white group-hover:text-[#65A30D] transition">{{ $sport['name'] }}</h3>
-                                <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">{{ $sport['desc'] }}</p>
+                            <div class="p-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-[#84CC16] transition">Mini Soccer</h3>
+                                    <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">Rumput sintetis FIFA standard</p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 group-hover:bg-[#84CC16] group-hover:text-slate-950 transition duration-300 shrink-0 ml-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @endforeach
+                    </a>
+
+                    <!-- Card 2: Badminton -->
+                    <a href="#" class="bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden hover:border-[#84CC16]/50 transition group flex flex-col justify-between shadow-xl block">
+                        <div>
+                            <div class="h-48 relative overflow-hidden bg-slate-800">
+                                <img src="{{ asset('Rekomendasi Olahraga/Badminton.png') }}" alt="Badminton" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 right-3 text-[10px] px-3 py-1 bg-[#84CC16] text-slate-950 font-extrabold rounded-full tracking-wider shadow-md uppercase">TERSEDIA</span>
+                            </div>
+                            <div class="p-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-[#84CC16] transition">Badminton</h3>
+                                    <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">Karpet vinyl anti-slip & lighting LED</p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 group-hover:bg-[#84CC16] group-hover:text-slate-950 transition duration-300 shrink-0 ml-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 3: Padel -->
+                    <a href="#" class="bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden hover:border-[#84CC16]/50 transition group flex flex-col justify-between shadow-xl block">
+                        <div>
+                            <div class="h-48 relative overflow-hidden bg-slate-800">
+                                <img src="{{ asset('Rekomendasi Olahraga/Padel.png') }}" alt="Padel" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 right-3 text-[10px] px-3 py-1 bg-[#84CC16] text-slate-950 font-extrabold rounded-full tracking-wider shadow-md uppercase">TERSEDIA</span>
+                            </div>
+                            <div class="p-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-[#84CC16] transition">Padel</h3>
+                                    <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">Panorama glass wall outdoor</p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 group-hover:bg-[#84CC16] group-hover:text-slate-950 transition duration-300 shrink-0 ml-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 4: Basket -->
+                    <a href="#" class="bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden hover:border-[#84CC16]/50 transition group flex flex-col justify-between shadow-xl block">
+                        <div>
+                            <div class="h-48 relative overflow-hidden bg-slate-800">
+                                <img src="{{ asset('Rekomendasi Olahraga/Basket.png') }}" alt="Basket" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 right-3 text-[10px] px-3 py-1 bg-[#84CC16] text-slate-950 font-extrabold rounded-full tracking-wider shadow-md uppercase">TERSEDIA</span>
+                            </div>
+                            <div class="p-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-[#84CC16] transition">Basket</h3>
+                                    <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">Lapangan kayu parquet & outdoor</p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 group-hover:bg-[#84CC16] group-hover:text-slate-950 transition duration-300 shrink-0 ml-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 5: Futsal -->
+                    <a href="#" class="bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden hover:border-[#84CC16]/50 transition group flex flex-col justify-between shadow-xl block">
+                        <div>
+                            <div class="h-48 relative overflow-hidden bg-slate-800">
+                                <img src="{{ asset('Rekomendasi Olahraga/Futsal.png') }}" alt="Futsal" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 right-3 text-[10px] px-3 py-1 bg-[#84CC16] text-slate-950 font-extrabold rounded-full tracking-wider shadow-md uppercase">TERSEDIA</span>
+                            </div>
+                            <div class="p-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-[#84CC16] transition">Futsal</h3>
+                                    <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">Lantai interlock & rumput sintetis</p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 group-hover:bg-[#84CC16] group-hover:text-slate-950 transition duration-300 shrink-0 ml-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 6: Sepak Bola -->
+                    <a href="#" class="bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden hover:border-[#84CC16]/50 transition group flex flex-col justify-between shadow-xl block">
+                        <div>
+                            <div class="h-48 relative overflow-hidden bg-slate-800">
+                                <img src="{{ asset('Rekomendasi Olahraga/Sepak Bola.png') }}" alt="Sepak Bola" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition duration-500 mb-50">
+                                <span class="absolute top-3 right-3 text-[10px] px-3 py-1 bg-[#84CC16] text-slate-950 font-extrabold rounded-full tracking-wider shadow-md uppercase">TERSEDIA</span>
+                            </div>
+                            <div class="p-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-[#84CC16] transition">Sepak Bola</h3>
+                                    <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">Stadion outdoor rumput alami & sintetis</p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 group-hover:bg-[#84CC16] group-hover:text-slate-950 transition duration-300 shrink-0 ml-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 7: Tenis  -->
+                    <a href="#" class="bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden hover:border-[#84CC16]/50 transition group flex flex-col justify-between shadow-xl block">
+                        <div>
+                            <div class="h-48 relative overflow-hidden bg-slate-800">
+                                <img src="{{ asset('Rekomendasi Olahraga/Tenis.png') }}" alt="Tenis" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 right-3 text-[10px] px-3 py-1 bg-[#84CC16] text-slate-950 font-extrabold rounded-full tracking-wider shadow-md uppercase">TERSEDIA</span>
+                            </div>
+                            <div class="p-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-[#84CC16] transition">Tenis</h3>
+                                    <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">Hard court & clay court berstandar</p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 group-hover:bg-[#84CC16] group-hover:text-slate-950 transition duration-300 shrink-0 ml-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 8: Renang -->
+                    <a href="#" class="bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden hover:border-[#84CC16]/50 transition group flex flex-col justify-between shadow-xl block">
+                        <div>
+                            <div class="h-48 relative overflow-hidden bg-slate-800">
+                                <img src="{{ asset('Rekomendasi Olahraga/Renang.png') }}" alt="Renang" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 right-3 text-[10px] px-3 py-1 bg-[#84CC16] text-slate-950 font-extrabold rounded-full tracking-wider shadow-md uppercase">TERSEDIA</span>
+                            </div>
+                            <div class="p-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-[#84CC16] transition">Renang</h3>
+                                    <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">Kolam olympic semi-indoor & outdoor</p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 group-hover:bg-[#84CC16] group-hover:text-slate-950 transition duration-300 shrink-0 ml-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
                 </div>
             </div>
         </section>
