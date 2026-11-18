@@ -7,7 +7,7 @@
                 {{-- Badge Info --}}
                 <span class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 text-xs sm:text-sm font-medium bg-slate-900 text-[#84CC16] rounded-full border border-slate-800 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-[#84CC16] animate-pulse"></span>
-                    ⚡ Booking Instan & Terverifikasi • 50+ Lapangan Aktif
+                    Booking Instan & Terverifikasi 
                 </span>
 
                 {{-- Judul Utama --}}
@@ -67,7 +67,7 @@
                     <div class="relative group overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 h-56 shadow-xl">
                         <img src="{{ asset('Fasilitas (Tentang Kami)/Rectangle-6.png') }}" alt="Court Tenis Outdoor" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-slate-700/50 shadow-md">
-                            Court Tenis
+                            Lapangan Tenis
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@
                         <img src="{{ asset('Fasilitas (Tentang Kami)/Rectangle 9.png') }}" alt="Arena Futsal Pro" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
 
                         <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-slate-700/50 shadow-md">
-                            Arena Futsal Pro
+                           Lapangan Futsal
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                         <img src="{{ asset('Fasilitas (Tentang Kami)/Rectangle 7.png') }}" alt="Mini Soccer Turf" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
 
                         <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-slate-700/50 shadow-md">
-                            Mini Soccer Turf
+                            Lapangan MiniSoccer
                         </div>
                     </div>
 
@@ -94,7 +94,7 @@
                         <img src="{{ asset('Fasilitas (Tentang Kami)/Rectangle 10.png') }}" alt="Badminton Hall" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
 
                         <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-slate-700/50 shadow-md">
-                            Badminton Hall
+                            Lapangan Badminton
                         </div>
                     </div>
 
@@ -336,7 +336,7 @@
                             Jangan biarkan rencana jadwal sempat terlewat! Amankan arena latihanmu sekarang dan rasakan pengalaman booking anti-ribet.
                         </p>
                         <div class="flex flex-col sm:flex-row justify-center gap-4">
-                            <a href="#lapangan" class="px-8 py-4 bg-[#65A30D] text-slate-950 font-bold rounded-xl hover:bg-[#84CC16] transition shadow-lg shadow-[#65A30D]/10">
+                            <a href="#lapangan" class="px-8 py-4 bg-[#65A30D] text-white font-bold rounded-xl hover:bg-[#84CC16] transition shadow-lg shadow-[#65A30D]/10">
                                 Pesan Lapangan Sekarang
                             </a>
                             <a href="#tentang" class="px-8 py-4 bg-slate-900 text-white font-medium rounded-xl hover:bg-slate-800 transition border border-slate-800">
