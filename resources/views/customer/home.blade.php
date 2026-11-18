@@ -7,7 +7,7 @@
                 {{-- Badge Info --}}
                 <span class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 text-xs sm:text-sm font-medium bg-slate-900 text-[#84CC16] rounded-full border border-slate-800 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-[#84CC16] animate-pulse"></span>
-                    Booking Instan & Terverifikasi 
+                    Booking Instan & Terverifikasi
                 </span>
 
                 {{-- Judul Utama --}}
@@ -76,7 +76,7 @@
                         <img src="{{ asset('Fasilitas (Tentang Kami)/Rectangle 9.png') }}" alt="Arena Futsal Pro" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
 
                         <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-slate-700/50 shadow-md">
-                           Lapangan Futsal
+                            Lapangan Futsal
                         </div>
                     </div>
 
@@ -290,9 +290,9 @@
             </div>
         </section>
 
-        {{-- FAQ Section --}}
+        {{-- FAQ Section dengan Animasi Buka-Tutup --}}
         <section class="w-full py-16 lg:py-24 px-6 sm:px-8 lg:px-16 bg-[#F8FAFC]">
-            <div class="w-full max-w-5xl mx-auto">
+            <div class="w-full max-w-4xl mx-auto">
                 <div class="text-center max-w-2xl mx-auto mb-16">
                     <span class="inline-block px-3 py-1 mb-2 text-xs font-semibold bg-[#84CC16]/10 text-[#65A30D] border border-[#84CC16]/20 rounded-full tracking-wider uppercase">Tanya Jawab Umum</span>
                     <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3 text-[#0F172A]">
@@ -301,30 +301,55 @@
                     <p class="text-[#475569] text-sm sm:text-base">Punya pertanyaan seputar proses booking, venue, atau pembayaran? Temukan jawabannya di sini.</p>
                 </div>
 
-                <div class="space-y-4">
+                <!-- Alpine.js untuk mengelola status buka-tutup per item -->
+                <div class="space-y-4" x-data="{ openItem: 1 }">
                     @php
                     $faqs = [
-                    ['q' => 'Apa kelebihan sewa lapangan yang tersedia di WANGISPORT?', 'a' => 'WANGISPORT menyediakan sistem booking lapangan secara online, konfirmasi otomatis, pilihan venue berkualitas tinggi, serta jaminan jadwal langsung tanpa antre.'],
-                    ['q' => 'Bagaimana cara memesan lapangan di WANGISPORT?', 'a' => 'Cukup pilih menu lapangan, tentukan venue dan jadwal tanggal/jam yang kosong, lalu lanjutkan ke pembayaran instan.'],
-                    ['q' => 'Bagaimana cara menemukan lapangan yang sesuai dengan kebutuhan saya?', 'a' => 'Anda dapat memfilter rekomendasi olahraga berdasarkan jenis fasilitas, lokasi venue, atau standar internasional yang diinginkan.'],
-                    ['q' => 'Bagaimana proses pengajuan pembatalan booking untuk lapangan?', 'a' => 'Pembatalan dapat diajukan melalui pusat bantuan atau riwayat pesanan dengan mengikuti ketentuan kebijakan masing-masing venue partner.'],
-                    ['q' => 'Apakah ada diskon atau promo khusus untuk penyewa lapangan di WANGISPORT?', 'a' => 'Tentu! Kami menyediakan berbagai penawaran diskon khusus member setia dan promo menarik di hari-hari tertentu.'],
+                    ['id' => 1, 'q' => 'Apa kelebihan sewa lapangan yang tersedia di WANGISPORT?', 'a' => 'Di WANGISPORT, jadwal lapangan selalu diperbarui secara langsung (real-time). Kamu tidak perlu chat admin berulang kali hanya untuk memastikan jam kosong. Dilengkapi sistem verifikasi instan, beragam pilihan metode bayar, serta venue bermutu tinggi dengan pencahayaan dan lantai berstandar olahraga resmi.'],
+                    ['id' => 2, 'q' => 'Bagaimana cara memesan lapangan di WANGISPORT?', 'a' => 'Cukup pilih menu lapangan, tentukan venue dan jadwal tanggal/jam yang kosong, lalu lanjutkan ke pembayaran instan.'],
+                    ['id' => 3, 'q' => 'Bagaimana cara menemukan lapangan yang sesuai dengan kebutuhan saya?', 'a' => 'Anda dapat memfilter rekomendasi olahraga berdasarkan jenis fasilitas, lokasi venue, atau standar internasional yang diinginkan.'],
+                    ['id' => 4, 'q' => 'Bagaimana proses pengajuan pembatalan booking untuk lapangan?', 'a' => 'Pembatalan dapat diajukan melalui pusat bantuan atau riwayat pesanan dengan mengikuti ketentuan kebijakan masing-masing venue partner.'],
+                    ['id' => 5, 'q' => 'Apakah ada diskon atau promo khusus untuk penyewa lapangan di WANGISPORT?', 'a' => 'Tentu! Kami menyediakan berbagai penawaran diskon khusus member setia dan promo menarik di hari-hari tertentu.'],
                     ];
                     @endphp
 
                     @foreach($faqs as $faq)
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 transition hover:border-slate-700">
-                        <div class="flex justify-between items-center cursor-pointer">
-                            <h3 class="font-semibold text-base sm:text-lg text-white">{{ $faq['q'] }}</h3>
-                            <span class="text-slate-400 text-lg font-bold ml-4">&#9662;</span>
+                    <div class="bg-white border border-slate-200/80 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
+
+                        <!-- Tombol Pertanyaan -->
+                        <button @click="openItem = openItem === {{ $faq['id'] }} ? null : {{ $faq['id'] }}"
+                            class="w-full p-6 flex justify-between items-center text-left focus:outline-none">
+                            <span class="font-bold text-base sm:text-lg text-slate-900 pr-4">{{ $faq['q'] }}</span>
+
+                            <!-- Ikon Panah dengan Animasi Putar -->
+                            <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 transition-transform duration-300 shrink-0"
+                                :class="{ 'rotate-180 bg-[#84CC16]/20 text-[#65A30D]': openItem === {{ $faq['id'] }} }">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </button>
+
+                        <!-- Area Jawaban dengan Animasi Slide Terbuka -->
+                        <div x-show="openItem === {{ $faq['id'] }}"
+                            x-transition:enter="transition-all ease-out duration-300"
+                            x-transition:enter-start="opacity-0 max-h-0"
+                            x-transition:enter-end="opacity-100 max-h-96"
+                            x-transition:leave="transition-all ease-in duration-200"
+                            x-transition:leave-start="opacity-100 max-h-96"
+                            x-transition:leave-end="opacity-0 max-h-0"
+                            class="overflow-hidden px-6 pb-6">
+                            <div class="pt-4 border-t border-slate-100 text-slate-600 text-sm sm:text-base leading-relaxed">
+                                {{ $faq['a'] }}
+                            </div>
                         </div>
-                        <p class="text-slate-400 text-sm mt-3 leading-relaxed border-t border-slate-800/60 pt-3">{{ $faq['a'] }}</p>
+
                     </div>
                     @endforeach
                 </div>
             </div>
         </section>
-
+        
         {{-- Call To Action (CTA) Section --}}
         <section class="w-full py-16 px-6 sm:px-8 lg:px-16 bg-[#F8FAFC]">
             <div class="w-full">

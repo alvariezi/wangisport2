@@ -8,6 +8,8 @@
 
     <!-- Memanggil CSS & JS Tailwind via Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="bg-[#0B0F17]/78 text-white font-sans antialiased selection:bg-[#A3E635] selection:text-slate-950 min-h-screen flex flex-col m-0 p-0 overflow-x-hidden w-full">
