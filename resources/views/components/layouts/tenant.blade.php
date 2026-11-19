@@ -51,7 +51,7 @@
                     <p class="text-xs font-bold text-zinc-800 dark:text-zinc-200">{{ auth()->user()->name }}</p> 
                     <p class="text-[10px] text-emerald-600 font-semibold">Operator Tenant</p> 
                 </div> 
-                <form method="POST" action="{{ route('logout') }}"> 
+                <form method="POST" action="{{ route('logout') }}" data-logout-confirm> 
                     @csrf 
                     <button type="submit" class="w-full text-left px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-xl"> 
                         Keluar (Logout) 
@@ -65,5 +65,6 @@
             {{ $slot }} 
         </main> 
     </div> 
+    @include('partials.logout-modal')
 </body> 
 </html>

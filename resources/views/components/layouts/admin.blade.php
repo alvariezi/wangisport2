@@ -41,9 +41,9 @@
                     </div>
 
                     <!-- DASHBOARD -->
-                    <a href="{{ url('/dashboard') }}"
+                    <a href="{{ route('admin.dashboard') }}"
                         class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-colors
-                        {{ request()->is('dashboard') ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/80 dark:text-indigo-400' : 'text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/60' }}">
+                        {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/80 dark:text-indigo-400' : 'text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/60' }}">
 
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -66,47 +66,35 @@
                         Daftar Venue
                     </a>
 
-                    <!-- DAFTAR TENANT -->
-                    <a href="{{ route('admin.tenants.index') }}"
+                    <!-- MANAJEMEN OPERATOR -->
+                    <a href="{{ route('admin.operators.index') }}"
                         class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-medium transition-colors
-                        {{ request()->routeIs('admin.tenants.*') ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400' : 'text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/60' }}">
-
-                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        {{ request()->routeIs('admin.operators.*') ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400' : 'text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/60' }}">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2m7-10a4 4 0 100-8 4 4 0 000 8zm8 10v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
                         </svg>
-
-                        <span>Daftar Tenant</span>
+                        Manajemen Operator
                     </a>
 
-                    <!-- SKEMA KOMISI -->
-                    <a href="{{ route('admin.commissions.index') }}"
-                        class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-medium transition-colors
-                        {{ request()->routeIs('admin.commissions.*') ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400' : 'text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/60' }}">
-
-                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-
-                        Skema Komisi
-                    </a>
-
-                    <!-- SECURITY -->
+                    <!-- PINTASAN VENUE -->
                     <div class="mb-2 px-3 pt-4 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                        Sistem Security
+                        Akses Cepat
                     </div>
 
-                    <!-- AUDIT LOG -->
-                    <a href="#"
-                        class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/60">
-
-                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    <a href="{{ route('admin.venues.create') }}"
+                        class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-medium transition-colors {{ request()->routeIs('admin.venues.create') ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400' : 'text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/60' }}">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
+                        Tambah Venue
+                    </a>
 
-                        Audit Log
+                    <a href="{{ route('admin.dashboard') }}#grafik-venue"
+                        class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-medium transition-colors text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/60">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 19V5m0 14h16M8 16v-4m5 4V8m5 8V6" />
+                        </svg>
+                        Statistik Venue
                     </a>
 
                 </nav>
@@ -135,12 +123,12 @@
                 </div>
 
                 <!-- TOMBOL LOGOUT -->
-                <form method="POST" action="{{ route('logout') }}" class="mt-2">
+                <form method="POST" action="{{ route('logout') }}" data-logout-confirm class="mt-2">
                     @csrf
 
                     <button
                         type="submit"
-                        onclick="return confirm('Apakah Anda yakin ingin logout?')"
+                        
                         class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/40">
 
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,5 +170,6 @@
 
     @fluxScripts
 
+    @include('partials.logout-modal')
 </body>
 </html>

@@ -11,11 +11,19 @@ class Timeslot extends Model
 {
     use BelongsToTenant, HasFactory;
 
-    protected $fillable = ['court_id', 'start_time', 'end_time', 'base_price', 'is_peak_rate', 'is_available'];
+    protected $fillable = [
+        'tenant_id', 'court_id', 'day_of_week', 'start_time', 'end_time',
+        'base_price', 'is_peak_rate', 'is_available',
+    ];
 
     protected function casts(): array
     {
-        return ['base_price' => 'integer', 'is_peak_rate' => 'boolean', 'is_available' => 'boolean'];
+        return [
+            'day_of_week' => 'integer',
+            'base_price' => 'integer',
+            'is_peak_rate' => 'boolean',
+            'is_available' => 'boolean',
+        ];
     }
 
     public function tenant(): BelongsTo

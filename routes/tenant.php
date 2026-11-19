@@ -1,8 +1,10 @@
 <?php
 
-use App\Models\Tenant;
+use App\Http\Controllers\Tenant\TenantDashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', function (Tenant $tenant) {
-    return view('tenant.dashboard', ['tenant' => $tenant]);
-})->name('dashboard');
+// Portal alternatif /tenant/{tenant}/dashboard: perlu validasi keanggotaan.
+// Nama route berbeda agar tidak menimpa tenant.dashboard di routes/web.php.
+Route::get('/dashboard', [TenantDashboardController::class, 'index'])
+    ->middleware('tenant')
+    ->name('portal.dashboard');

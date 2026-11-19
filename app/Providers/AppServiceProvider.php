@@ -2,53 +2,37 @@
 
 namespace App\Providers;
 
-use App\Support\Tenancy\TenantContext;
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Facades\Date;
+use App\Models\Court;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        $this->app->scoped(
-            TenantContext::class,
-            fn (): TenantContext => new TenantContext,
-        );
+        //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        $this->configureDefaults();
-    }
+        View::composer('layouts.tenant', function ($view) {
+            $sidebarCourts = collect();
 
-    /**
-     * Configure default behaviors for production-ready applications.
-     */
-    protected function configureDefaults(): void
-    {
-        Date::use(CarbonImmutable::class);
+            if (Auth::check() && Auth::user()->role === 'tenant') {
+                $tenantId = DB::table('user_tenant_roles')
+                    ->where('user_id', Auth::id())
+                    ->value('tenant_id');
 
-        DB::prohibitDestructiveCommands(
-            app()->isProduction(),
-        );
+                if ($tenantId) {
+                    $sidebarCourts = Court::where('tenant_id', $tenantId)
+                        ->orderBy('name')
+                        ->get();
+                }
+            }
 
-        Password::defaults(fn (): ?Password => app()->isProduction()
-            ? Password::min(12)
-                ->mixedCase()
-                ->letters()
-                ->numbers()
-                ->symbols()
-                ->uncompromised()
-            : null,
-        );
+            $view->with('sidebarCourts', $sidebarCourts);
+        });
     }
 }

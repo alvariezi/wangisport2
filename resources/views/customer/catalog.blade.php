@@ -1,14 +1,13 @@
 <x-layouts.customer :title="'Sewa Lapangan - Wangisport'">
 
     {{-- Header / Hero Katalog --}}
-    <section class="w-full pt-14 pb-20 px-6 sm:px-8 lg:px-16 bg-gradient-to-b from-[#072612] via-[#0B3B1C] to-[#0F172A] text-white">
+    <section class="w-full py-14 px-6 sm:px-8 lg:px-16 bg-gradient-to-b from-[#072612] via-[#0B3B1C] to-[#0F172A] text-white">
         <div class="max-w-7xl mx-auto text-center space-y-4">
-            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 text-xs sm:text-sm font-medium bg-slate-900 text-[#84CC16] rounded-full border border-slate-800 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-[#84CC16] animate-pulse"></span>
+            <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-extrabold bg-[#84CC16]/15 text-[#A3E635] border border-[#84CC16]/30">
                 Katalog Arena &amp; Lapangan Resmi Banyuwangi
             </span>
             <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight uppercase">
-                Sewa Lapangan Olahraga <br class="hidden sm:block"> <span class="bg-gradient-to-r from-[#A3E635] via-[#84CC16] to-[#10B981] bg-clip-text text-transparent">Kabupaten Banyuwangi</span>
+                Sewa Lapangan Olahraga <br class="hidden sm:block"> Kabupaten Banyuwangi
             </h1>
             <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto">
                 Cari arena favoritmu, cek slot jadwal jam bermain secara live, dan reservasi instan tanpa ribet antre.
@@ -17,15 +16,15 @@
     </section>
 
     {{-- Filter & Pencarian --}}
-    <section class="w-full px-6 sm:px-8 lg:px-16 pt-2 pb-6 bg-gradient-to-b from-[#0F172A] via-[#0F172A] to-[#F8FAFC] relative z-10">
+    <section class="w-full px-6 sm:px-8 lg:px-16 mt-7 relative z-10">
         <form method="GET" action="{{ url()->current() }}" class="max-w-7xl mx-auto bg-white text-slate-900 rounded-2xl shadow-xl border border-slate-200 p-4 sm:p-5 space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
                 <div class="md:col-span-6">
                     <input type="text"
-                        name="q"
-                        value="{{ $search ?? '' }}"
-                        placeholder="Cari nama lapangan, arena, atau venue..."
-                        class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-[#84CC16]">
+                           name="q"
+                           value="{{ $search ?? '' }}"
+                           placeholder="Cari nama lapangan, arena, atau venue..."
+                           class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-[#84CC16]">
                 </div>
 
                 <div class="md:col-span-4">
@@ -49,30 +48,30 @@
 
             {{-- Filter Cepat Kategori --}}
             @php
-            $quickCategories = [
-            'all' => 'Semua',
-            'badminton' => 'Badminton',
-            'futsal' => 'Futsal',
-            'mini-soccer' => 'Mini Soccer',
-            'basket' => 'Basket',
-            'padel' => 'Padel',
-            ];
-            $activeCat = $category ?? 'all';
+                $quickCategories = [
+                    'all' => 'Semua',
+                    'badminton' => 'Badminton',
+                    'futsal' => 'Futsal',
+                    'mini-soccer' => 'Mini Soccer',
+                    'basket' => 'Basket',
+                    'padel' => 'Padel',
+                ];
+                $activeCat = $category ?? 'all';
             @endphp
             <div class="flex flex-wrap items-center gap-2 pt-1 text-xs">
                 <span class="text-slate-500 font-medium mr-1">Pilihan Cepat:</span>
                 @foreach($quickCategories as $slug => $label)
-                <a href="{{ url()->current() . ($slug !== 'all' ? '?category=' . $slug : '') }}"
-                    class="px-3 py-1.5 rounded-full font-semibold transition {{ $activeCat === $slug ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                    {{ $label }}
-                </a>
+                    <a href="{{ url()->current() . ($slug !== 'all' ? '?category=' . $slug : '') }}"
+                       class="px-3 py-1.5 rounded-full font-semibold transition {{ $activeCat === $slug ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
+                        {{ $label }}
+                    </a>
                 @endforeach
             </div>
         </form>
     </section>
 
     {{-- Daftar Lapangan Olahraga dari Database --}}
-    <section id="daftar-lapangan" class="w-full pt-6 pb-16 lg:pb-20 px-6 sm:px-8 lg:px-16 bg-[#F8FAFC] text-slate-900">
+    <section class="w-full py-12 lg:py-16 px-6 sm:px-8 lg:px-16 bg-[#F8FAFC] text-slate-900">
         <div class="max-w-7xl mx-auto">
 
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
@@ -90,124 +89,89 @@
             </div>
 
             @if($courts->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($courts as $court)
-                <div class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
-                    <div>
-                        {{-- Thumbnail & Badge --}}
-                        <div class="relative h-48 bg-slate-900 overflow-hidden">
-                            <img src="{{ $court->gambar ? asset('storage/' . $court->gambar) : asset('rectangle-6.png') }}"
-                                alt="{{ $court->court_name }}"
-                                class="w-full h-full object-cover object-center">
-
-                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#84CC16] text-slate-950">
-                                {{ $court->type }}
-                            </span>
-
-                            <span class="absolute bottom-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-950/75 text-white backdrop-blur-sm">
-                                {{ $court->venue_name }}
-                            </span>
-                        </div>
-
-                        {{-- Detail Lapangan --}}
-                        <div class="p-5 space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach($courts as $court)
+                        <a href="{{ route('customer.courts.show', $court->id) }}" aria-label="Lihat detail {{ $court->court_name }}" class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-lime-500 transition flex flex-col justify-between">
                             <div>
-                                <h3 class="font-extrabold text-base sm:text-lg text-slate-900 uppercase tracking-tight">
-                                    {{ $court->court_name }}
-                                </h3>
-                                <p class="text-xs text-slate-500 mt-0.5">
-                                    {{ $court->tenant_name }}
-                                </p>
+                                {{-- Thumbnail & Badge --}}
+                                <div class="relative h-48 bg-slate-900 overflow-hidden">
+                                    <img src="{{ $court->gambar ? asset('storage/' . $court->gambar) : asset('rectangle-6.png') }}"
+                                         alt="{{ $court->court_name }}"
+                                         class="w-full h-full object-cover object-center">
+
+                                    <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#84CC16] text-slate-950">
+                                        {{ $court->type }}
+                                    </span>
+
+                                    <span class="absolute bottom-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-950/75 text-white backdrop-blur-sm">
+                                        {{ $court->venue_name }}
+                                    </span>
+                                </div>
+
+                                {{-- Detail Lapangan --}}
+                                <div class="p-5 space-y-3">
+                                    <div>
+                                        <h3 class="font-extrabold text-base sm:text-lg text-slate-900 uppercase tracking-tight">
+                                            {{ $court->court_name }}
+                                        </h3>
+                                        <p class="text-xs text-slate-500 mt-0.5">
+                                            {{ $court->tenant_name }}
+                                        </p>
+                                    </div>
+
+                                    {{-- Tag Tipe & Permukaan Lapangan --}}
+                                    <div class="flex flex-wrap gap-1.5 pt-1">
+                                        <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium uppercase">
+                                            {{ $court->type }}
+                                        </span>
+                                        @if($court->surface_type)
+                                            <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium">
+                                                {{ $court->surface_type }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
 
-                            {{-- Tag Tipe & Permukaan Lapangan --}}
-                            <div class="flex flex-wrap gap-1.5 pt-1">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium uppercase">
-                                    {{ $court->type }}
+                            {{-- Harga & Tombol Aksi --}}
+                            <div class="px-5 py-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                                <div>
+                                    @if(!is_null($court->starting_price))
+                                        <p class="text-[11px] text-slate-400">Mulai dari</p>
+                                        <p class="text-base sm:text-lg font-extrabold text-slate-900">
+                                            Rp {{ number_format($court->starting_price, 0, ',', '.') }}
+                                        </p>
+                                    @else
+                                        <p class="text-xs font-semibold text-slate-500">Hubungi Venue</p>
+                                    @endif
+                                </div>
+
+                                <span class="px-4 py-2 rounded-xl bg-slate-900 group-hover:bg-[#84CC16] text-white text-xs font-bold transition inline-flex items-center gap-1.5">
+                                    <span>Pilih Jadwal</span>
+                                    <span>&rarr;</span>
                                 </span>
-                                @if($court->surface_type)
-                                <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium">
-                                    {{ $court->surface_type }}
-                                </span>
-                                @endif
                             </div>
-                        </div>
-                    </div>
-
-                    {{-- Harga & Tombol Aksi --}}
-                    <div class="px-5 py-4 border-t border-slate-100 flex items-center justify-between gap-3">
-                        <div>
-                            @if(!is_null($court->starting_price))
-                            <p class="text-[11px] text-slate-400">Mulai dari</p>
-                            <p class="text-base sm:text-lg font-extrabold text-slate-900">
-                                Rp {{ number_format($court->starting_price, 0, ',', '.') }}
-                            </p>
-                            @else
-                            <p class="text-xs font-semibold text-slate-500">Hubungi Venue</p>
-                            @endif
-                        </div>
-
-                        <a href="#daftar-lapangan"
-                            class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-[#84CC16] text-white hover:text-slate-950 text-xs font-bold transition inline-flex items-center gap-1.5">
-                            <span>Pilih Jadwal</span>
-                            <span>&rarr;</span>
                         </a>
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
 
-            {{-- Pagination --}}
-            <div class="mt-8">
-                {{ $courts->links() }}
-            </div>
+                {{-- Pagination --}}
+                <div class="mt-8">
+                    {{ $courts->links() }}
+                </div>
             @else
-            <div class="bg-white rounded-2xl border border-slate-200 p-10 text-center space-y-2">
-                <p class="font-bold text-slate-800 text-base">Belum ada lapangan yang sesuai filter.</p>
-                <p class="text-slate-500 text-sm">Coba pilih kategori lain atau reset kata kunci pencarian.</p>
-            </div>
+                <div class="bg-white rounded-2xl border border-slate-200 p-10 text-center space-y-2">
+                    <p class="font-bold text-slate-800 text-base">Belum ada lapangan yang sesuai filter.</p>
+                    <p class="text-slate-500 text-sm">Coba pilih kategori lain atau reset kata kunci pencarian.</p>
+                </div>
             @endif
 
         </div>
     </section>
 
-    {{-- Call To Action (CTA) Section --}}
-    <section class="w-full py-12 px-6 sm:px-8 lg:px-16 bg-[#F8FAFC]">
-        <div class="max-w-7xl mx-auto">
-            <div class="bg-[#070B12] border border-slate-800/80 rounded-3xl p-8 sm:p-10 lg:px-12 lg:py-10 relative overflow-hidden shadow-2xl">
-                {{-- Efek Glow Hijau di Sisi Kanan --}}
-                <div class="pointer-events-none absolute -right-10 -top-16 w-80 h-80 rounded-full bg-[#4D7C0F]/35 blur-3xl"></div>
-                <div class="pointer-events-none absolute right-12 -bottom-20 w-72 h-72 rounded-full bg-[#15803D]/25 blur-3xl"></div>
-
-                <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-10">
-                    {{-- Bagian Kiri: Label, Judul, Deskripsi --}}
-                    <div class="max-w-2xl text-left space-y-2.5">
-                        <p class="text-[11px] sm:text-xs font-extrabold tracking-[0.18em] text-[#84CC16] uppercase">
-                            KERJASAMA VENUE OWNER
-                        </p>
-                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                            Punya Lapangan Olahraga di Banyuwangi?
-                        </h2>
-                        <p class="text-slate-400 text-xs sm:text-sm lg:text-[15px] leading-relaxed">
-                            Daftarkan arena lapangamu ke WANGISPORT untuk tingkatkan okupansi jam sewa dan kelola booking otomatis 24/7.
-                        </p>
-                    </div>
-
-                    {{-- Bagian Kanan: Tombol Aksi --}}
-                    <div class="shrink-0">
-                        <a href="#"
-                            class="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#84CC16] hover:bg-[#A3E635] text-slate-950 font-extrabold text-xs sm:text-sm rounded-xl transition shadow-[0_0_28px_rgba(132,204,22,0.35)]">
-                            <span>Daftarkan Venue Sekarang</span>
-                            <span>&rarr;</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Footer -->
-    <footer class="bg-gradient-to-r from-slate-900 via-slate-900 to-[#0B0F17] border-t border-slate-800/80 pt-14 pb-8 px-6 sm:px-8 lg:px-16 text-slate-400 text-xs sm:text-sm w-full">
+    <footer class="bg-[#070B12] border-t border-slate-800/80 pt-14 pb-8 px-6 sm:px-8 lg:px-16 text-slate-400 text-xs sm:text-sm w-full">
         <div class="w-full">
             <!-- Grid 4 Kolom Utama -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12">

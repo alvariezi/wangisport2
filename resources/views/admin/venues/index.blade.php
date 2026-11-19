@@ -32,7 +32,7 @@
                             <th class="px-6 py-3.5 font-semibold">Foto</th>
                             <th class="px-6 py-3.5 font-semibold">Nama Venue</th>
                             <th class="px-6 py-3.5 font-semibold">Kode Unique</th>
-                            <th class="px-6 py-3.5 font-semibold">Jumlah Tenant Mitra</th>
+                            <th class="px-6 py-3.5 font-semibold">Jumlah Court Mitra</th>
                             <th class="px-6 py-3.5 font-semibold">Status Operasional</th>
                             <th class="px-6 py-3.5 font-semibold text-right">Aksi</th>
                         </tr>
@@ -54,7 +54,11 @@
                                     <span class="rounded bg-zinc-100 px-2 py-1 dark:bg-zinc-800 font-bold">{{ $venue->code }}</span>
                                 </td>
                                 <td class="px-6 py-4 text-zinc-700 dark:text-zinc-300 font-semibold">
-                                    {{ $venue->tenants_count ?? 0 }} Tenant
+                                    <a href="{{ route('admin.venues.courts', $venue) }}"
+                                       class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-500/10 px-3 py-2 font-bold text-indigo-600 hover:bg-indigo-500/20 hover:text-indigo-500 transition dark:text-indigo-400">
+                                        {{ $venue->courts_count ?? 0 }} Court
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                    </a>
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($venue->status === 'active')

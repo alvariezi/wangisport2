@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Venue extends Model
 {
@@ -14,15 +15,25 @@ class Venue extends Model
         'name',
         'gambar',
         'code',
-        'slug', // <--- Pastikan 'slug' ada di sini
+        'slug',
         'status',
     ];
 
-    /**
-     * Relasi HasMany ke Tenant
-     */
     public function tenants(): HasMany
     {
         return $this->hasMany(Tenant::class);
+    }
+
+    // courts.tenant_id -> tenants.id -> tenants.venue_id -> venues.id
+    public function courts(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Court::class,
+            Tenant::class,
+            'venue_id',
+            'tenant_id',
+            'id',
+            'id'
+        );
     }
 }

@@ -49,6 +49,33 @@
                     @enderror
                 </div>
 
+                <!-- Akun login untuk pengelola venue -->
+                <div class="border-t border-zinc-200 pt-5 mt-6 dark:border-zinc-700 space-y-4">
+                    <div>
+                        <h2 class="text-base font-bold text-zinc-900 dark:text-white">Akun Login Operator Venue</h2>
+                        <p class="text-xs text-zinc-500">Akun ini digunakan untuk masuk ke Dashboard Tenant dan mengelola Courts pada venue baru.</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Nama Operator</label>
+                        <input type="text" name="operator_name" value="{{ old('operator_name') }}" required maxlength="255" autocomplete="name" class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" placeholder="Contoh: Operator Saiki">
+                        @error('operator_name')<span class="text-xs text-red-500">{{ $message }}</span>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Email Login Tenant</label>
+                        <input type="email" name="operator_email" value="{{ old('operator_email') }}" required maxlength="255" autocomplete="off" class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" placeholder="operator@example.com">
+                        @error('operator_email')<span class="text-xs text-red-500">{{ $message }}</span>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Password Awal</label>
+                        <input type="password" name="operator_password" required minlength="8" autocomplete="new-password" class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" placeholder="Minimal 8 karakter">
+                        @error('operator_password')<span class="text-xs text-red-500">{{ $message }}</span>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Konfirmasi Password</label>
+                        <input type="password" name="operator_password_confirmation" required minlength="8" autocomplete="new-password" class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" placeholder="Ulangi password">
+                    </div>
+                </div>
+
                 <div class="flex items-center justify-end gap-3 pt-4">
                     <a href="{{ route('admin.venues.index') }}" class="rounded-xl bg-zinc-100 px-4 py-2.5 text-xs font-semibold text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300">Batal</a>
                     <button type="submit" class="rounded-xl bg-indigo-600 px-5 py-2.5 text-xs font-semibold text-white hover:bg-indigo-500">Simpan Venue</button>
