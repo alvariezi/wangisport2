@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-[#0B0F17]/78 text-white font-sans overflow-x-hidden selection:bg-[#84CC16] selection:text-slate-950 w-full">
 
         {{-- Hero Section --}}
-        <section class="w-full relative overflow-hidden py-16 lg:py-28 px-6 sm:px-8 lg:px-16 border-b border-slate-800/80 bg-">
+        <section class="w-full py-14 px-6 sm:px-8 lg:px-16 bg-gradient-to-b from-[#072612] via-[#0B3B1C] to-[#0F172A] text-white">
             <div class="w-full flex flex-col items-center text-center">
                 {{-- Badge Info --}}
                 <span class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 text-xs sm:text-sm font-medium bg-slate-900 text-[#84CC16] rounded-full border border-slate-800 shadow-sm">
@@ -375,7 +375,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-[#070B12] border-t border-slate-800/80 pt-14 pb-8 px-6 sm:px-8 lg:px-16 text-slate-400 text-xs sm:text-sm w-full">
+    <footer class="bg-gradient-to-r from-slate-900 via-slate-900 to-[#0B0F17] border-t border-slate-800/80 pt-14 pb-8 px-6 sm:px-8 lg:px-16 text-slate-400 text-xs sm:text-sm w-full">
         <div class="w-full">
             <!-- Grid 4 Kolom Utama -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12">
