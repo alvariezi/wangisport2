@@ -32,7 +32,8 @@
         <div class="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm">
 
             <form method="POST"
-                  action="{{ route('tenant.courts.store') }}"
+                  action="{{ route('tenant.courts.manage.store') }}"
+                  enctype="multipart/form-data"
                   class="space-y-5 text-xs">
 
                 @csrf
@@ -101,6 +102,16 @@
                            class="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-100 focus:border-emerald-500 focus:outline-none">
                 </div>
 
+
+
+                <!-- Foto Lapangan -->
+                <div>
+                    <label for="gambar" class="block font-semibold text-zinc-300 mb-1">Foto Lapangan</label>
+                    <input type="file" id="gambar" name="gambar" accept="image/jpeg,image/png,image/webp"
+                           class="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-100">
+                    <p class="mt-1 text-zinc-500">JPG, PNG, atau WebP, maksimal 2 MB.</p>
+                    @error('gambar') <p class="mt-1 text-red-400">{{ $message }}</p> @enderror
+                </div>
 
                 <!-- Status Lapangan -->
                 <div class="flex items-center gap-2 pt-2">

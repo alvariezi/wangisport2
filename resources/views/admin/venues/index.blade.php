@@ -29,6 +29,7 @@
                 <table class="w-full text-left text-sm">
                     <thead class="border-b border-zinc-200/80 bg-zinc-50/70 text-xs uppercase tracking-wider text-zinc-500 dark:border-zinc-800 dark:bg-zinc-950/50 dark:text-zinc-400">
                         <tr>
+                            <th class="px-6 py-3.5 font-semibold">Foto</th>
                             <th class="px-6 py-3.5 font-semibold">Nama Venue</th>
                             <th class="px-6 py-3.5 font-semibold">Kode Unique</th>
                             <th class="px-6 py-3.5 font-semibold">Jumlah Tenant Mitra</th>
@@ -39,6 +40,13 @@
                     <tbody class="divide-y divide-zinc-200/80 dark:divide-zinc-800">
                         @forelse ($venues as $venue)
                             <tr class="transition-colors hover:bg-zinc-50/80 dark:hover:bg-zinc-800/40">
+                                <td class="px-6 py-4">
+                                    @if ($venue->gambar)
+                                        <img src="{{ asset('storage/' . $venue->gambar) }}" alt="{{ $venue->name }}" class="h-14 w-20 rounded-lg object-cover">
+                                    @else
+                                        <span class="text-xs text-zinc-400">Belum ada foto</span>
+                                    @endif
+                                </td>
                                 <td class="px-6 py-4 font-bold text-zinc-900 dark:text-zinc-100">
                                     {{ $venue->name }}
                                 </td>
@@ -80,7 +88,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="px-6 py-12 text-center text-sm text-zinc-500">
+                                <td colspan="6" class="px-6 py-12 text-center text-sm text-zinc-500">
                                     Belum ada venue terdaftar.
                                 </td>
                             </tr>

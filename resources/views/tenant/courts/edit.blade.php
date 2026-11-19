@@ -30,6 +30,7 @@
 
             <form method="POST"
                 action="{{ route('tenant.courts.manage.update', $court) }}"
+                enctype="multipart/form-data"
                 class="space-y-5 text-xs">
 
                 @csrf
@@ -120,6 +121,20 @@
                             {{ $message }}
                         </p>
                     @enderror
+                </div>
+
+
+                <!-- Foto Lapangan -->
+                <div>
+                    <label for="gambar" class="block font-semibold text-zinc-300 mb-1">Foto Lapangan</label>
+                    @if ($court->gambar)
+                        <img src="{{ asset('storage/' . $court->gambar) }}" alt="Foto {{ $court->name }}"
+                             class="mb-3 h-36 w-56 rounded-xl object-cover border border-zinc-700">
+                    @endif
+                    <input type="file" id="gambar" name="gambar" accept="image/jpeg,image/png,image/webp"
+                           class="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-100">
+                    <p class="mt-1 text-zinc-500">Kosongkan jika tidak ingin mengganti. Maksimal 2 MB.</p>
+                    @error('gambar') <p class="mt-1 text-red-400">{{ $message }}</p> @enderror
                 </div>
 
                 <!-- Status Lapangan -->

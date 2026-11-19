@@ -96,7 +96,7 @@
                     <div>
                         {{-- Thumbnail & Badge --}}
                         <div class="relative h-48 bg-slate-900 overflow-hidden">
-                            <img src="{{ asset('rectangle-6.png') }}"
+                            <img src="{{ $court->gambar ? asset('storage/' . $court->gambar) : asset('rectangle-6.png') }}"
                                 alt="{{ $court->court_name }}"
                                 class="w-full h-full object-cover object-center">
 

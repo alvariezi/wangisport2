@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tenant;
 use App\Models\Venue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminTenantController extends Controller
 {
@@ -38,7 +39,12 @@ class AdminTenantController extends Controller
             'slug'         => 'required|string|max:100|unique:tenants,slug',
             'display_name' => 'required|string|max:120',
             'status'       => 'required|in:pending,active,suspended,inactive',
+            'gambar'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        if ($request->hasFile('gambar')) {
+            $validated['gambar'] = $request->file('gambar')->store('tenants', 'public');
+        }
 
         Tenant::create($validated);
 
@@ -66,9 +72,21 @@ class AdminTenantController extends Controller
             'slug'         => 'required|string|max:100|unique:tenants,slug,' . $tenant->id,
             'display_name' => 'required|string|max:120',
             'status'       => 'required|in:pending,active,suspended,inactive',
+            'gambar'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
+        $oldImage = $tenant->gambar;
+        if ($request->hasFile('gambar')) {
+            $validated['gambar'] = $request->file('gambar')->store('tenants', 'public');
+        } else {
+            unset($validated['gambar']);
+        }
+
         $tenant->update($validated);
+
+        if ($request->hasFile('gambar') && $oldImage) {
+            Storage::disk('public')->delete($oldImage);
+        }
 
         return redirect()->route('admin.tenants.index')
             ->with('status', 'Data tenant berhasil diperbarui!');
@@ -79,7 +97,12 @@ class AdminTenantController extends Controller
      */
     public function destroy(Tenant $tenant)
     {
+        $gambar = $tenant->gambar;
         $tenant->delete();
+
+        if ($gambar) {
+            Storage::disk('public')->delete($gambar);
+        }
 
         return redirect()->route('admin.tenants.index')
             ->with('status', 'Tenant mitra berhasil dihapus!');

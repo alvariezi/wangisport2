@@ -6,7 +6,7 @@
         </div>
 
         <div class="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-            <form action="{{ route('admin.venues.update', $venue) }}" method="POST" class="space-y-4">
+            <form action="{{ route('admin.venues.update', $venue) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 @method('PUT')
 
@@ -24,6 +24,22 @@
                     <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Kode Unique Venue</label>
                     <input type="text" name="code" value="{{ old('code', $venue->code) }}" required class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm font-mono dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100">
                     @error('code')
+                        <span class="text-xs text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                @if ($venue->gambar)
+                    <div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">Foto Saat Ini</p>
+                        <img src="{{ asset('storage/' . $venue->gambar) }}" alt="{{ $venue->name }}" class="h-32 w-48 rounded-xl object-cover">
+                    </div>
+                @endif
+
+                <!-- Gambar Venue -->
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Foto Venue (JPG/PNG/WebP, maksimal 2 MB)</label>
+                    <input type="file" name="gambar" accept="image/jpeg,image/png,image/webp" class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100">
+                    @error('gambar')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                     @enderror
                 </div>

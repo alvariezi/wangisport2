@@ -3,7 +3,6 @@
     use App\Models\Tenant;
     use App\Models\CommissionScheme;
 
-    // Fetch data langsung dari database
     $totalVenues = Venue::query()->count();
     $totalTenants = Tenant::query()->count();
     $activeTenants = Tenant::query()->where('status', 'active')->count();
@@ -16,9 +15,7 @@
 
 <x-layouts.admin title="Dashboard Super Admin Platform">
     <div class="space-y-8">
-        <!-- 1. Hero Welcome Banner -->
         <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-zinc-900 via-indigo-950 to-zinc-900 p-6 sm:p-8 text-white shadow-xl">
-            <!-- Background Decorative Blur Grid -->
             <div class="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none"></div>
             <div class="absolute right-1/3 -bottom-10 h-48 w-48 rounded-full bg-emerald-500/10 blur-2xl pointer-events-none"></div>
             
@@ -47,9 +44,7 @@
             </div>
         </div>
 
-        <!-- 2. Kartu Statistik Ringkasan -->
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <!-- Metric 1: Venue -->
             <div class="group relative overflow-hidden rounded-2xl border border-zinc-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Total Venue</span>
@@ -70,8 +65,6 @@
                     {{ $totalVenues }} Arena Terverifikasi
                 </div>
             </div>
-
-            <!-- Metric 2: Tenant Mitra -->
             <div class="group relative overflow-hidden rounded-2xl border border-zinc-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Tenant Mitra</span>
@@ -91,7 +84,6 @@
                 </div>
             </div>
 
-            <!-- Metric 3: Skema Komisi -->
             <div class="group relative overflow-hidden rounded-2xl border border-zinc-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Komisi Platform</span>
@@ -109,7 +101,6 @@
                 </div>
             </div>
 
-            <!-- Metric 4: Keamanan Tenancy -->
             <div class="group relative overflow-hidden rounded-2xl border border-zinc-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Isolasi Data</span>
@@ -128,9 +119,7 @@
             </div>
         </div>
 
-        <!-- 3. Tabel Data Venue & Tenant Mitra -->
         <div class="overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-            <!-- Header Tabel -->
             <div class="flex flex-col gap-4 border-b border-zinc-200/80 px-6 py-5 sm:flex-row sm:items-center sm:justify-between dark:border-zinc-800">
                 <div>
                     <h2 class="text-lg font-bold text-zinc-900 dark:text-zinc-100">
@@ -150,7 +139,6 @@
                 </div>
             </div>
 
-            <!-- Tabel Body -->
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
                     <thead class="border-b border-zinc-200/80 bg-zinc-50/70 text-xs uppercase tracking-wider text-zinc-500 dark:border-zinc-800 dark:bg-zinc-950/50 dark:text-zinc-400">
@@ -164,7 +152,6 @@
                     <tbody class="divide-y divide-zinc-200/80 dark:divide-zinc-800">
                         @forelse ($venues as $venue)
                             <tr class="transition-colors hover:bg-zinc-50/80 dark:hover:bg-zinc-800/40">
-                                <!-- Kolom Venue -->
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
                                         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-sm font-bold text-white shadow-md shadow-indigo-500/20">
@@ -180,7 +167,6 @@
                                     </div>
                                 </td>
 
-                                <!-- Kolom Tenant -->
                                 <td class="px-6 py-4">
                                     @forelse ($venue->tenants as $tenant)
                                         <div class="flex items-center gap-2">
@@ -195,7 +181,6 @@
                                     @endforelse
                                 </td>
 
-                                <!-- Kolom Status -->
                                 <td class="px-6 py-4">
                                     @if ($venue->status === 'active')
                                         <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-600/20 dark:bg-emerald-950/60 dark:text-emerald-300">
@@ -208,7 +193,6 @@
                                     @endif
                                 </td>
 
-                                <!-- Kolom Tax & Service Fee -->
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3 text-xs font-mono">
                                         <span class="rounded-md bg-zinc-100 px-2 py-1 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">

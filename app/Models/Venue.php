@@ -12,6 +12,7 @@ class Venue extends Model
 
     protected $fillable = [
         'name',
+        'gambar',
         'code',
         'slug', // <--- Pastikan 'slug' ada di sini
         'status',

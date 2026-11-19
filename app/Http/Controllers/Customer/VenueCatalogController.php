@@ -28,6 +28,7 @@ class VenueCatalogController extends Controller
                 'courts.name as court_name',
                 'courts.type',
                 'courts.surface_type',
+                'courts.gambar',
                 'tenants.display_name as tenant_name',
                 'venues.name as venue_name',
                 'venues.slug as venue_slug',
@@ -38,6 +39,7 @@ class VenueCatalogController extends Controller
                 'courts.name',
                 'courts.type',
                 'courts.surface_type',
+                'courts.gambar',
                 'tenants.display_name',
                 'venues.name',
                 'venues.slug'

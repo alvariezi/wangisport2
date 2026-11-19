@@ -104,6 +104,7 @@
                         class="border-b border-zinc-800 bg-zinc-950/60 font-semibold uppercase tracking-wider text-zinc-400">
 
                         <tr>
+                            <th class="p-4">Foto</th>
                             <th class="p-4">
                                 Nama Lapangan
                             </th>
@@ -134,6 +135,16 @@
                         @forelse ($courts as $court)
 
                             <tr class="transition-colors hover:bg-zinc-800/40">
+
+                                <!-- Foto Lapangan -->
+                                <td class="p-4">
+                                    @if ($court->gambar)
+                                        <img src="{{ asset('storage/' . $court->gambar) }}" alt="Foto {{ $court->name }}"
+                                             class="h-16 w-24 rounded-lg border border-zinc-700 object-cover">
+                                    @else
+                                        <div class="flex h-16 w-24 items-center justify-center rounded-lg bg-zinc-800 text-zinc-500">Belum ada foto</div>
+                                    @endif
+                                </td>
 
                                 <!-- Nama Lapangan -->
                                 <td class="flex items-center gap-3 p-4 font-bold text-zinc-100">
@@ -245,7 +256,7 @@
                             <!-- Kondisi Jika Belum Ada Lapangan -->
                             <tr>
 
-                                <td colspan="5" class="p-8 text-center text-zinc-500">
+                                <td colspan="6" class="p-8 text-center text-zinc-500">
 
                                     Belum ada lapangan yang terdaftar.
 

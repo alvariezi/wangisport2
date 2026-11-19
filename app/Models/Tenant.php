@@ -17,6 +17,7 @@ class Tenant extends Model
         'code',
         'slug',
         'display_name',
+        'gambar',
         'status',
     ];
 

@@ -6,7 +6,7 @@
         </div>
 
         <div class="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-            <form action="{{ route('admin.tenants.update', $tenant) }}" method="POST" class="space-y-4">
+            <form action="{{ route('admin.tenants.update', $tenant) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 @method('PUT')
 
@@ -30,6 +30,20 @@
                     <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Nama Tampilan Tenant</label>
                     <input type="text" name="display_name" value="{{ old('display_name', $tenant->display_name) }}" required class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100">
                     @error('display_name')
+                        <span class="text-xs text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Foto Tenant -->
+                <div>
+                    <label for="gambar" class="mb-1 block text-xs font-semibold uppercase tracking-wider text-zinc-500">Gambar Tenant</label>
+                    @if ($tenant->gambar)
+                        <img src="{{ asset('storage/' . $tenant->gambar) }}" alt="Foto {{ $tenant->display_name }}" class="mb-3 h-28 w-40 rounded-xl object-cover">
+                        <p class="mb-2 text-xs text-zinc-500">Kosongkan pilihan file jika tidak ingin mengganti gambar.</p>
+                    @endif
+                    <input id="gambar" type="file" name="gambar" accept="image/jpeg,image/png,image/webp" class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100">
+                    <p class="mt-1 text-xs text-zinc-500">JPG, PNG, atau WebP. Maksimal 2 MB.</p>
+                    @error('gambar')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                     @enderror
                 </div>

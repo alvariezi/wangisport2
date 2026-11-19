@@ -12,11 +12,20 @@ class Court extends Model
 {
     use BelongsToTenant, HasFactory;
 
-    protected $fillable = ['name', 'type', 'surface_type', 'is_active'];
+    protected $fillable = [
+        'tenant_id',
+        'name',
+        'type',
+        'surface_type',
+        'gambar',
+        'is_active',
+    ];
 
     protected function casts(): array
     {
-        return ['is_active' => 'boolean'];
+        return [
+            'is_active' => 'boolean',
+        ];
     }
 
     public function tenant(): BelongsTo
