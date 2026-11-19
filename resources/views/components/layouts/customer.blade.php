@@ -13,26 +13,41 @@
 <body class="bg-[#0B0F17]/78 text-white font-sans antialiased selection:bg-[#A3E635] selection:text-slate-950 min-h-screen flex flex-col m-0 p-0 overflow-x-hidden w-full">
 
     <!-- Navbar / Header -->
-    <header class="sticky top-0 z-50 bg-[#0F172A]/90 backdrop-blur-md border-b border-slate-800 w-full">
-        <div class="w-full px-6 sm:px-8 lg:px-16 h-20 flex items-center justify-between">
-
-            <!-- 1. Bagian Kiri: Logo (Diberi flex-1 agar mengambil porsi ruang yang sama) -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800/80 w-full">
+        <div class="w-full px-6 sm:px-8 lg:px-16 h-20 flex items-center justify-between gap-4">
             <div class="flex-1 flex items-center justify-start">
-                <span class="text-xl font-black tracking-wider text-white">WANGI<span class="text-[#A3E635]">SPORT</span></span>
+                <a href="{{ route('home') }}" class="text-xl font-black tracking-wider text-white">
+                    WANGI<span class="text-[#84CC16]">SPORT</span>
+                </a>
             </div>
 
-            <!-- 2. Bagian Tengah: Menu Navigasi (Dibuat center absolut) -->
-            <nav class="hidden md:flex items-center justify-center gap-8 text-sm font-medium text-slate-300 flex-1">
-                <a href="{{ route('home') }}" class="px-1 py-2.5 font-bold rounded-xl hover:bg-[#84CC16] hover:text-[#020617] transition">Beranda</a>
-                <a href="{{ route('customer.catalog') }}" class="px-1 py-2.5 font-bold rounded-xl hover:bg-[#84CC16] hover:text-[#020617] transition">Sewa Lapangan</a>
-                <a href="#lapangan" class="px-1 py-2.5 font-bold rounded-xl hover:bg-[#84CC16] hover:text-[#020617] transition">Pesanan Saya</a>
-                <a href="#lapangan" class="px-1 py-2.5 font-bold rounded-xl hover:bg-[#84CC16] hover:text-[#020617] transition">Kontak Kami</a>
+            <nav class="hidden md:flex items-center justify-center p-1.5 rounded-full bg-slate-900/90 border border-slate-800/90 text-xs lg:text-sm font-semibold text-slate-300 shadow-inner">
+                <a href="{{ route('home') }}"
+                    class="px-4 py-2 rounded-full transition {{ request()->routeIs('home') ? 'bg-[#84CC16] text-slate-950 font-bold shadow-[0_0_20px_rgba(132,204,22,0.35)]' : 'hover:text-white' }}">
+                    Beranda
+                </a>
+
+                <a href="{{ route('customer.catalog') }}"
+                    class="px-4 py-2 rounded-full transition {{ request()->routeIs('customer.catalog') ? 'bg-[#84CC16] text-slate-950 font-bold shadow-[0_0_20px_rgba(132,204,22,0.35)]' : 'hover:text-white' }}">
+                    Sewa Lapangan
+                </a>
+
+                <a href="#lapangan"
+                    class="px-4 py-2 rounded-full hover:text-white transition">
+                    Pesanan Saya
+                </a>
+
+                <a href="#lapangan"
+                    class="px-4 py-2 rounded-full hover:text-white transition">
+                    Kontak Kami
+                </a>
             </nav>
 
-            <!-- 3. Bagian Kanan -->
+            <!-- 3. Bagian Kanan: Tombol CTA -->
             <div class="flex-1 flex items-center justify-end gap-3">
-                <a href="#lapangan" class="px-5 py-2.5 bg-[#84CC16] text-slate-950 font-bold text-xs sm:text-sm rounded-xl hover:bg-[#0F172A] hover:text-[#CBD5E1] border border-transparent hover:border-[#CBD5E1] transition">
-                    Booking Sekarang
+                <a href="{{ route('customer.catalog') }}"
+                    class="px-5 py-2.5 bg-[#84CC16] hover:bg-[#A3E635] text-slate-950 font-extrabold text-xs sm:text-sm rounded-full transition shadow-[0_0_24px_rgba(132,204,22,0.3)]">
+                    Booking Sekarang &rarr;
                 </a>
             </div>
 

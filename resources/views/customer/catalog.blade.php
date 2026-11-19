@@ -3,7 +3,8 @@
     {{-- Header / Hero Katalog --}}
     <section class="w-full pt-14 pb-20 px-6 sm:px-8 lg:px-16 bg-gradient-to-b from-[#072612] via-[#0B3B1C] to-[#0F172A] text-white">
         <div class="max-w-7xl mx-auto text-center space-y-4">
-            <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-extrabold bg-[#84CC16]/15 text-[#A3E635] border border-[#84CC16]/30">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 text-xs sm:text-sm font-medium bg-slate-900 text-[#84CC16] rounded-full border border-slate-800 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-[#84CC16] animate-pulse"></span>
                 Katalog Arena &amp; Lapangan Resmi Banyuwangi
             </span>
             <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight uppercase">
@@ -205,7 +206,7 @@
         </div>
     </section>
 
-     <!-- Footer -->
+    <!-- Footer -->
     <footer class="bg-gradient-to-r from-slate-900 via-slate-900 to-[#0B0F17] border-t border-slate-800/80 pt-14 pb-8 px-6 sm:px-8 lg:px-16 text-slate-400 text-xs sm:text-sm w-full">
         <div class="w-full">
             <!-- Grid 4 Kolom Utama -->

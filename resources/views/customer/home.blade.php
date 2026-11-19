@@ -12,7 +12,7 @@
 
                 {{-- Judul Utama --}}
                 <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                    Cari & Sewa Lapangan Olahraga <span class="text-[#84CC16] block sm:inline">Tanpa Ribet</span>
+                    Cari & Sewa Lapangan Olahraga <br class="hidden sm:block"> <span class="bg-gradient-to-r from-[#A3E635] via-[#84CC16] to-[#10B981] bg-clip-text text-transparent">Tanpa Ribet</span>
                 </h1>
 
                 {{-- Deskripsi --}}
@@ -21,11 +21,15 @@
                 </p>
 
                 {{-- Tombol Aksi --}}
-                <div class="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
-                    <a href="#lapangan" class="px-8 py-4 bg-[#84CC16] text-slate-950 font-bold text-xs sm:text-sm rounded-xl hover:bg-[#0F172A] hover:text-[#CBD5E1] border border-transparent hover:border-[#CBD5E1] transition">
-                        Pesan Lapangan &rarr;
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto">
+                    <a href="{{ route('customer.catalog') }}"
+                        class="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#84CC16] hover:bg-[#A3E635] text-slate-950 font-extrabold text-xs sm:text-sm rounded-full transition shadow-[0_0_24px_rgba(132,204,22,0.3)]">
+                        <span>Pesan Lapangan</span>
+                        <span>&rarr;</span>
                     </a>
-                    <a href="#tentang" class="px-8 py-4 bg-slate-900 text-white font-medium rounded-xl hover:bg-slate-800 transition border border-slate-800 text-center">
+
+                    <a href="#tentang"
+                        class="inline-flex items-center justify-center px-7 py-3.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-xs sm:text-sm rounded-full transition border border-slate-700/80">
                         Baca Selengkapnya
                     </a>
                 </div>
