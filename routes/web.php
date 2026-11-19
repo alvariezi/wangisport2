@@ -26,8 +26,8 @@ Route::get('/', [CustomerHomeController::class, 'index'])
     ->name('home');
 
 // Katalog venue
-Route::get('/venues', [VenueCatalogController::class, 'index'])
-    ->name('venues.index');
+Route::get('/sewa-lapangan', [VenueCatalogController::class, 'index'])
+    ->name('customer.catalog');
 
 // Detail venue
 Route::get('/venues/{venue:slug}', [VenueCatalogController::class, 'showVenue'])
@@ -78,8 +78,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/dashboard', [CustomerHomeController::class, 'index'])
                 ->name('dashboard');
 
-            Route::get('/booking/checkout', [BookingController::class, 'checkout'])
-                ->name('booking.checkout');
+            Route::get('/sewa-lapangan', [VenueCatalogController::class, 'index'])
+                ->name('customer.catalog');
 
             Route::post('/booking/process', [BookingController::class, 'process'])
                 ->name('booking.process');
@@ -158,7 +158,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::delete('/manage-courts/{court}', [TenantCourtController::class, 'destroy'])
                 ->name('courts.manage.destroy');
         });
-
 }); // <-- Penutup utama untuk group middleware(['auth', 'verified'])
 
 

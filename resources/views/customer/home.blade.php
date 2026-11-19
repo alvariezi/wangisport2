@@ -349,7 +349,7 @@
                 </div>
             </div>
         </section>
-        
+
         {{-- Call To Action (CTA) Section --}}
         <section class="w-full py-16 px-6 sm:px-8 lg:px-16 bg-[#F8FAFC]">
             <div class="w-full">
@@ -373,4 +373,73 @@
             </div>
         </section>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#070B12] border-t border-slate-800/80 pt-14 pb-8 px-6 sm:px-8 lg:px-16 text-slate-400 text-xs sm:text-sm w-full">
+        <div class="w-full">
+            <!-- Grid 4 Kolom Utama -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12">
+
+                <!-- Kolom 1: Brand & Badge Status (5 kolom di desktop) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <a href="#" class="inline-block text-xl font-black tracking-wider text-white">
+                        WANGI<span class="text-[#A3E635]">SPORT</span>
+                    </a>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm">
+                        Main kapan saja, booking di mana saja. Platform direktori &amp; reservasi arena olahraga paling simpel dan tepercaya.
+                    </p>
+                    <div class="pt-1">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs font-semibold text-[#84CC16]">
+                            <span class="w-2 h-2 rounded-full bg-[#84CC16] animate-pulse"></span>
+                            Sistem Aktif 24/7
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Kolom 2: Navigasi (2 kolom di desktop) -->
+                <div class="lg:col-span-2 space-y-4">
+                    <h3 class="text-xs font-bold tracking-wider text-slate-300 uppercase">Navigasi</h3>
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-white transition">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-white transition">Sewa Lapangan</a></li>
+                        <li><a href="#lapangan" class="hover:text-white transition">Pesanan Saya</a></li>
+                        <li><a href="#lapangan" class="hover:text-white transition">Kontak Kami</a></li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 3: Layanan (2 kolom di desktop) -->
+                <div class="lg:col-span-2 space-y-4">
+                    <h3 class="text-xs font-bold tracking-wider text-slate-300 uppercase">Layanan</h3>
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-400">
+                        <li><a href="#lapangan" class="hover:text-white transition">Sewa Lapangan</a></li>
+                        <li><a href="#lapangan" class="hover:text-white transition">Cek Jadwal</a></li>
+                        <li><a href="#" class="hover:text-white transition">Gabung Mitra Venue</a></li>
+                        <li><a href="#" class="hover:text-white transition">Bantuan Booking</a></li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 4: Kontak (3 kolom di desktop) -->
+                <div class="lg:col-span-3 space-y-4">
+                    <h3 class="text-xs font-bold tracking-wider text-slate-300 uppercase">Kontak</h3>
+                    <ul class="space-y-3 text-xs sm:text-sm text-slate-400">
+                        <li class="flex items-center gap-2.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#84CC16] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            <span>08123456789</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#84CC16] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span class="break-all">wangisport77@gmail.com</span>
+                        </li>
+                        <li class="text-xs text-slate-500 leading-relaxed pt-1">
+                            Banyuwangi &amp; Sekitarnya, Jawa Timur, Indonesia.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 </x-layouts.customer>
