@@ -19,24 +19,29 @@
     {{-- Filter & Pencarian --}}
     <section class="w-full px-6 sm:px-8 lg:px-16 pt-2 pb-6 bg-gradient-to-b from-[#0F172A] via-[#0F172A] to-[#F8FAFC] relative z-10">
         <form method="GET" action="{{ url()->current() }}" class="max-w-7xl mx-auto bg-white text-slate-900 rounded-2xl shadow-xl border border-slate-200 p-4 sm:p-5 space-y-4">
+            @php
+            $currentSearch = trim((string) request('q', $search ?? ''));
+            $activeCat = strtolower(trim((string) request('category', $category ?? 'all')));
+            @endphp
+
             <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
                 <div class="md:col-span-6">
                     <input type="text"
                         name="q"
-                        value="{{ $search ?? '' }}"
+                        value="{{ $currentSearch }}"
                         placeholder="Cari nama lapangan, arena, atau venue..."
                         class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-[#84CC16]">
                 </div>
 
                 <div class="md:col-span-4">
                     <select name="category" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:border-[#84CC16]">
-                        <option value="all" {{ ($category ?? 'all') === 'all' ? 'selected' : '' }}>Semua Olahraga</option>
-                        <option value="futsal" {{ ($category ?? '') === 'futsal' ? 'selected' : '' }}>Futsal</option>
-                        <option value="badminton" {{ ($category ?? '') === 'badminton' ? 'selected' : '' }}>Badminton</option>
-                        <option value="mini-soccer" {{ ($category ?? '') === 'mini-soccer' ? 'selected' : '' }}>Mini Soccer</option>
-                        <option value="padel" {{ ($category ?? '') === 'padel' ? 'selected' : '' }}>Padel</option>
-                        <option value="basket" {{ ($category ?? '') === 'basket' ? 'selected' : '' }}>Basket</option>
-                        <option value="tenis" {{ ($category ?? '') === 'tenis' ? 'selected' : '' }}>Tenis</option>
+                        <option value="all" {{ $activeCat === 'all' ? 'selected' : '' }}>Semua Olahraga</option>
+                        <option value="futsal" {{ $activeCat === 'futsal' ? 'selected' : '' }}>Futsal</option>
+                        <option value="badminton" {{ $activeCat === 'badminton' ? 'selected' : '' }}>Badminton</option>
+                        <option value="mini-soccer" {{ $activeCat === 'mini-soccer' ? 'selected' : '' }}>Mini Soccer</option>
+                        <option value="padel" {{ $activeCat === 'padel' ? 'selected' : '' }}>Padel</option>
+                        <option value="basket" {{ $activeCat === 'basket' ? 'selected' : '' }}>Basket</option>
+                        <option value="tenis" {{ $activeCat === 'tenis' ? 'selected' : '' }}>Tenis</option>
                     </select>
                 </div>
 
@@ -57,12 +62,21 @@
             'basket' => 'Basket',
             'padel' => 'Padel',
             ];
-            $activeCat = $category ?? 'all';
             @endphp
             <div class="flex flex-wrap items-center gap-2 pt-1 text-xs">
                 <span class="text-slate-500 font-medium mr-1">Pilihan Cepat:</span>
                 @foreach($quickCategories as $slug => $label)
-                <a href="{{ url()->current() . ($slug !== 'all' ? '?category=' . $slug : '') }}"
+                @php
+                $queryParams = [];
+                if ($slug !== 'all') {
+                $queryParams['category'] = $slug;
+                }
+                if ($currentSearch !== '') {
+                $queryParams['q'] = $currentSearch;
+                }
+                $quickUrl = url()->current() . (!empty($queryParams) ? '?' . http_build_query($queryParams) : '');
+                @endphp
+                <a href="{{ $quickUrl }}"
                     class="px-3 py-1.5 rounded-full font-semibold transition {{ $activeCat === $slug ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
                     {{ $label }}
                 </a>
@@ -174,7 +188,6 @@
     <section class="w-full py-12 px-6 sm:px-8 lg:px-16 bg-[#F8FAFC]">
         <div class="max-w-7xl mx-auto">
             <div class="bg-[#070B12] border border-slate-800/80 rounded-3xl p-8 sm:p-10 lg:px-12 lg:py-10 relative overflow-hidden shadow-2xl">
-                {{-- Efek Glow Hijau di Sisi Kanan --}}
                 <div class="pointer-events-none absolute -right-10 -top-16 w-80 h-80 rounded-full bg-[#4D7C0F]/35 blur-3xl"></div>
                 <div class="pointer-events-none absolute right-12 -bottom-20 w-72 h-72 rounded-full bg-[#15803D]/25 blur-3xl"></div>
 

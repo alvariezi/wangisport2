@@ -10,8 +10,8 @@ class VenueCatalogController extends Controller
 {
     public function index(Request $request)
     {
-        $category = $request->query('category');
-        $search   = $request->query('q');
+        $category = strtolower(trim((string) $request->query('category', 'all')));
+        $search   = trim((string) $request->query('q', ''));
 
         $query = DB::table('courts')
             ->join('tenants', 'courts.tenant_id', '=', 'tenants.id')
@@ -45,51 +45,64 @@ class VenueCatalogController extends Controller
                 'venues.slug'
             );
 
-        if (!empty($category) && $category !== 'all') {
-            $query->whereRaw('LOWER(courts.type) = ?', [strtolower($category)]);
-        }
+        // 1. Filter Kategori dropdown / pilihan cepat
+        if ($category !== '' && $category !== 'all') {
+            $normalizedCategory = str_replace(['-', '_'], ' ', $category);
 
-        if (!empty($search)) {
-            $query->where(function ($q) use ($search) {
-                $q->where('courts.name', 'like', '%' . $search . '%')
-                  ->orWhere('tenants.display_name', 'like', '%' . $search . '%')
-                  ->orWhere('venues.name', 'like', '%' . $search . '%');
+            $query->where(function ($q) use ($category, $normalizedCategory) {
+                $q->whereRaw('LOWER(courts.type) = ?', [$category])
+                  ->orWhereRaw('LOWER(REPLACE(REPLACE(courts.type, "-", " "), "_", " ")) = ?', [$normalizedCategory]);
             });
         }
 
-        $courts = $query->orderBy('courts.id')->paginate(6)->withQueryString();
+        // 2. Pencarian kata kunci 'q'
+        if ($search !== '') {
+            $sportKeywords = [
+                'futsal',
+                'badminton',
+                'mini soccer',
+                'mini-soccer',
+                'padel',
+                'basket',
+                'tenis',
+            ];
 
-        return view('customer.catalog', compact('courts', 'category', 'search'));
-    }
+            $keywords = preg_split('/\s+/', strtolower($search), -1, PREG_SPLIT_NO_EMPTY);
 
-    /** Halaman detail publik satu lapangan dan jadwal tersedia. */
-    public function showCourt(int $court)
-    {
-        $courtData = DB::table('courts')
-            ->join('tenants', 'courts.tenant_id', '=', 'tenants.id')
-            ->join('venues', 'tenants.venue_id', '=', 'venues.id')
-            ->where('courts.id', $court)
-            ->where('courts.is_active', 1)
-            ->where('tenants.status', 'active')
-            ->where('venues.status', 'active')
-            ->select([
-                'courts.id', 'courts.name as court_name', 'courts.type',
-                'courts.surface_type', 'courts.gambar',
-                'tenants.display_name as tenant_name',
-                'venues.name as venue_name', 'venues.slug as venue_slug',
-            ])->first();
+            foreach ($keywords as $word) {
+                $normalizedWord = str_replace(['-', '_'], ' ', $word);
+                $likeWord = '%' . $normalizedWord . '%';
 
-        abort_unless($courtData, 404);
+                // Jika kata yang diketik adalah nama olahraga (mis. 'futsal'),
+                // cocokkan hanya dengan tipe olahraga/nama lapangan, bukan nama tenant/venue gabungan.
+                if (in_array($word, $sportKeywords, true) || in_array($normalizedWord, $sportKeywords, true)) {
+                    $query->where(function ($q) use ($word, $normalizedWord, $likeWord) {
+                        $q->whereRaw('LOWER(courts.type) = ?', [$word])
+                          ->orWhereRaw('LOWER(REPLACE(REPLACE(courts.type, "-", " "), "_", " ")) = ?', [$normalizedWord])
+                          ->orWhereRaw('LOWER(courts.type) LIKE ?', [$likeWord])
+                          ->orWhereRaw('LOWER(courts.name) LIKE ?', [$likeWord]);
+                    });
+                } else {
+                    $query->where(function ($q) use ($likeWord) {
+                        $q->whereRaw('LOWER(courts.name) LIKE ?', [$likeWord])
+                          ->orWhereRaw('LOWER(COALESCE(courts.surface_type, "")) LIKE ?', [$likeWord])
+                          ->orWhereRaw('LOWER(tenants.display_name) LIKE ?', [$likeWord])
+                          ->orWhereRaw('LOWER(venues.name) LIKE ?', [$likeWord]);
+                    });
+                }
+            }
+        }
 
-        $timeslots = DB::table('timeslots')
-            ->where('court_id', $courtData->id)
-            ->where('is_available', 1)
-            ->orderByRaw('CASE WHEN day_of_week IS NULL THEN 8 ELSE day_of_week END')
-            ->orderBy('start_time')
-            ->get(['id', 'day_of_week', 'start_time', 'end_time', 'base_price']);
+        $courts = $query
+            ->orderBy('courts.type')
+            ->orderBy('courts.id')
+            ->paginate(6)
+            ->withQueryString();
 
-        $startingPrice = $timeslots->min('base_price');
+        $groupedCourts = $courts->getCollection()->groupBy(function ($item) {
+            return strtolower(trim((string) $item->type)) ?: 'lainnya';
+        });
 
-        return view('customer.courts.show', compact('courtData', 'timeslots', 'startingPrice'));
+        return view('customer.catalog', compact('courts', 'groupedCourts', 'category', 'search'));
     }
 }
