@@ -405,7 +405,7 @@
                     <h3 class="text-xs font-bold tracking-wider text-slate-300 uppercase">Navigasi</h3>
                     <ul class="space-y-2.5 text-xs sm:text-sm text-slate-400">
                         <li><a href="#" class="hover:text-white transition">Beranda</a></li>
-                        <li><a href="#tentang" class="hover:text-white transition">Sewa Lapangan</a></li>
+                        <li><a href="{{ route('customer.catalog') }}" class="hover:text-white transition">Sewa Lapangan</a></li>
                         <li><a href="#lapangan" class="hover:text-white transition">Pesanan Saya</a></li>
                         <li><a href="#lapangan" class="hover:text-white transition">Kontak Kami</a></li>
                     </ul>
@@ -415,7 +415,7 @@
                 <div class="lg:col-span-2 space-y-4">
                     <h3 class="text-xs font-bold tracking-wider text-slate-300 uppercase">Layanan</h3>
                     <ul class="space-y-2.5 text-xs sm:text-sm text-slate-400">
-                        <li><a href="#lapangan" class="hover:text-white transition">Sewa Lapangan</a></li>
+                        <li><a href="{{ route('customer.catalog') }}" class="hover:text-white transition">Sewa Lapangan</a></li>
                         <li><a href="#lapangan" class="hover:text-white transition">Cek Jadwal</a></li>
                         <li><a href="#" class="hover:text-white transition">Gabung Mitra Venue</a></li>
                         <li><a href="#" class="hover:text-white transition">Bantuan Booking</a></li>
