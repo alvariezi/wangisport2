@@ -4,11 +4,11 @@
     <section class="w-full py-14 px-6 sm:px-8 lg:px-16 bg-gradient-to-b from-[#072612] via-[#0B3B1C] to-[#0F172A] text-white">
         <div class="max-w-7xl mx-auto text-center space-y-4">
             <span class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 text-xs sm:text-sm font-medium bg-slate-900 text-[#84CC16] rounded-full border border-slate-800 shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-[#84CC16] animate-pulse"></span>
+                <span class="w-2 h-2 rounded-full bg-[#84CC16] animate-pulse"></span>
                 Katalog Arena &amp; Lapangan Resmi Banyuwangi
             </span>
             <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight uppercase">
-                Sewa Lapangan Olahraga <br class="hidden sm:block"> <span class="bg-gradient-to-r from-[#A3E635] via-[#84CC16] to-[#10B981] bg-clip-text text-transparent">Kabupaten Banyuwangi</span> 
+                Sewa Lapangan Olahraga <br class="hidden sm:block"> <span class="bg-gradient-to-r from-[#A3E635] via-[#84CC16] to-[#10B981] bg-clip-text text-transparent">Kabupaten Banyuwangi</span>
             </h1>
             <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto">
                 Cari arena favoritmu, cek slot jadwal jam bermain secara live, dan reservasi instan tanpa ribet antre.
@@ -167,6 +167,41 @@
             </div>
             @endif
 
+        </div>
+    </section>
+
+    {{-- Call To Action (CTA) Section --}}
+    <section class="w-full py-12 px-6 sm:px-8 lg:px-16 bg-[#F8FAFC]">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-[#070B12] border border-slate-800/80 rounded-3xl p-8 sm:p-10 lg:px-12 lg:py-10 relative overflow-hidden shadow-2xl">
+                {{-- Efek Glow Hijau di Sisi Kanan --}}
+                <div class="pointer-events-none absolute -right-10 -top-16 w-80 h-80 rounded-full bg-[#4D7C0F]/35 blur-3xl"></div>
+                <div class="pointer-events-none absolute right-12 -bottom-20 w-72 h-72 rounded-full bg-[#15803D]/25 blur-3xl"></div>
+
+                <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-10">
+                    {{-- Bagian Kiri: Label, Judul, Deskripsi --}}
+                    <div class="max-w-2xl text-left space-y-2.5">
+                        <p class="text-[11px] sm:text-xs font-extrabold tracking-[0.18em] text-[#84CC16] uppercase">
+                            KERJASAMA VENUE OWNER
+                        </p>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                            Punya Lapangan Olahraga di Banyuwangi?
+                        </h2>
+                        <p class="text-slate-400 text-xs sm:text-sm lg:text-[15px] leading-relaxed">
+                            Daftarkan arena lapangamu ke WANGISPORT untuk tingkatkan okupansi jam sewa dan kelola booking otomatis 24/7.
+                        </p>
+                    </div>
+
+                    {{-- Bagian Kanan: Tombol Aksi --}}
+                    <div class="shrink-0">
+                        <a href="#"
+                            class="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#84CC16] hover:bg-[#A3E635] text-slate-950 font-extrabold text-xs sm:text-sm rounded-xl transition shadow-[0_0_28px_rgba(132,204,22,0.35)]">
+                            <span>Daftarkan Venue Sekarang</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

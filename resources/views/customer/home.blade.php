@@ -358,6 +358,12 @@
         <section class="w-full py-16 px-6 sm:px-8 lg:px-16 bg-[#F8FAFC]">
             <div class="w-full">
                 <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-[#0B0F17] border border-slate-800 rounded-3xl p-8 sm:p-12 lg:p-16 text-center relative overflow-hidden shadow-2xl">
+                    <div class="pointer-events-none absolute -right-10 -top-16 w-80 h-80 rounded-full bg-[#4D7C0F]/35 blur-3xl"></div>
+                    <div class="pointer-events-none absolute right-12 -bottom-20 w-72 h-72 rounded-full bg-[#15803D]/25 blur-3xl"></div>
+
+                    <div class="pointer-events-none absolute -left-10 -top-16 w-80 h-80 rounded-full bg-[#4D7C0F]/35 blur-3xl"></div>
+                    <div class="pointer-events-none absolute left-12 -bottom-20 w-72 h-72 rounded-full bg-[#15803D]/25 blur-3xl"></div>
+
                     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(163,230,53,0.08)_0,transparent_60%)]"></div>
                     <div class="relative z-10 max-w-2xl mx-auto">
                         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white">Siap Bertanding Hari Ini?</h2>
